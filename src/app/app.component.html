@@ -1,1 +1,12 @@
 <student-input></student-input>
+<hr>
+
+<div [formGroup]="courseForm">
+    Value: {{ courseForm.value | json }}
+<button (click)="addCourseTitle(beluga.value)">ADD COURSE</button>
+<input
+#beluga
+formControlName="courseTitle">
+</div>
+<hr>
+<grades-form [thisCourse]="course" (focus)="emitCourse(course)" *ngFor="let course of coursesArray"></grades-form>

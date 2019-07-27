@@ -1,0 +1,78 @@
+<hr>
+<button (click)="newStudent(studentName)">ADD STUDENT</button>
+<input 
+#studentName
+type="text">
+<hr>
+
+<hr>
+<button (click)="newAssignment(assignmentTitle, total)">ADD ASSIGNMENT</button>
+<input 
+#assignmentTitle
+type="text">
+<input 
+#total
+type="text">
+<hr>
+
+<div
+[style.margin]="auto" 
+class="table_container">  
+Value: {{ student.value | json }}
+    <table [formGroup]="gradesForm" align="center" id="table_id">
+        <thead>
+        <tr>
+            <td colspan="12" align="center" style="background-color:brown"><h1 
+            #course [id]="courseId">{{ courseTitle }}</h1></td>
+        </tr>
+    </thead>
+        <colgroup>
+            <col style="background-color: rgb(255, 81, 0)">
+            <col style="background-color: rgb(12, 247, 12)">
+            <col span="11" style="background-color: rgb(150, 247, 23)">
+        </colgroup>
+        <tr style="background-color: rgb(255, 81, 0)" >
+            <th>ASSIGNMENTS</th>
+            <th>TOTAL POSSSIBLE</th>
+            <th *ngFor="let student of studentsArray">
+                <span *ngIf="showSpan">{{ student.name }}</span>
+                <input 
+                (focus)="emitStudent(student)"
+                formControlName="student"
+                *ngIf="showInput">
+            </th>
+        </tr>
+        <tr *ngFor="let assignment of assignmentsArray">
+            <th class="headerCorrect">
+                <span *ngIf="showSpan">{{ assignment.title }}</span>
+                <input 
+                (focus)="emitAssignment(assignment)"
+                formControlName="assignment"
+                *ngIf="showInput">
+            </th>
+            <th class="scoreHeaderCorrect">
+                <span *ngIf="showSpan">{{ assignment.total }}</span>
+                <input *ngIf="showInput" 
+                (focus)="emitAssignmentTotal(assignment.total)"
+                formControlName="assignmentTotal">
+            </th>
+            <td align="center" *ngFor="let score of scores">
+                    <span *ngIf="showSpan">{{ score }}</span>
+                    <input 
+                    (focus)="emitScore(score)"
+                    formControlName="assignScore"
+                    *ngIf="showInput">
+                </td>
+        </tr>
+        <tr>
+            <th class="total">TOTAL</th>
+            <th class="total">{{ fart }}</th>
+            <td class="studentTotal" *ngFor="let total of totals"><h4>{{ total }}</h4></td>
+        </tr>
+    </table> 
+    </div>
+    <hr>
+    <button (click)="switchInputOrSpan()">EDIT MODE</button>
+    <hr>
+
+
