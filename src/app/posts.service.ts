@@ -55,17 +55,35 @@ getAssignments() {
         title, httpOptions
       )
       .subscribe(res => {
-        console.log('SubmitCourse hath beeneth invokedeth');
+        console.log("SubmitCourse hath beeneth invokedeth");
+        console.log(res);
+      });
+  }
+
+  submitAssignmentScore(score: any) {
+    console.log("submitAssignmentScore invoked in service");
+    console.log(score);
+    this.http
+      .post(
+        "http://localhost:3000/api/assignmentScores",
+        score, httpOptions
+      )
+      .subscribe(res => {
+        console.log("SubmitAssignScore hath beeneth invokedeth");
         console.log(res);
       });
   }
 
   submitAssignment(title: any) {
+    console.log(title);
     console.log("submitAsignment invoked");
-    return this.http
+    this.http
     .post("http://localhost:3000/api/assignments",
     title, httpOptions
     )
+    .subscribe(res => {
+      console.log(res);
+    })
   }
 
   submitStudent(title: any) {

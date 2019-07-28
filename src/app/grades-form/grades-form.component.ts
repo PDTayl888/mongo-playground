@@ -38,7 +38,7 @@ export class GradesFormComponent implements OnInit {
   showInput: boolean = false;
   showSpan: boolean = true;
   gradesForm: FormGroup;
-
+  // scoreInputToJson: any;
   student: FormControl;
   assignment: FormControl;
   assignScore: FormControl;
@@ -227,16 +227,35 @@ export class GradesFormComponent implements OnInit {
   // }
 
   newAssignment(assignmentTitle, total) {
+    console.log('newAssignment invoked');
+
     console.log(assignmentTitle.value);
     console.log(total.value);
     console.log(this.thisCourse._id);
-    const inputToJson = {
+    const inputToJson = 
+    {
       title: assignmentTitle.value,
       total: total.value,
       courseId: this.thisCourse._id
     };
-    console.log('newAssignment invoked');
+    console.log(inputToJson);
     this.posting.submitAssignment(inputToJson);
+
+    this.getStudents();
+    console.log(this.studentsArray);
+    if(this.studentsArray.length > 0) {
+      this.studentsArray.forEach(item => {
+        const scoreInputToJson = {
+          assignmentId: "poopyId",
+          studentId: item._id,
+          courseId: item.courseId,
+          score: 0
+        }
+        console.log(scoreInputToJson);
+        this.posting.submitAssignmentScore(scoreInputToJson);
+      })
+    }
+
     this.setScoresArray(); 
   }
 
@@ -251,7 +270,7 @@ export class GradesFormComponent implements OnInit {
 
     this.arrayForScoremap = this.studentsArray.filter(item => {
       console.log(item);
-       return this.thisCourse._id === item.courseId;
+      return this.thisCourse._id === item.courseId;
     })
     console.log(this.arrayForScoremap[1]);
     this.arrayForScoremap.forEach(item => {
