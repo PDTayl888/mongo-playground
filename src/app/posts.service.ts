@@ -28,6 +28,11 @@ getStudents() {
   return this.http.get("http://localhost:3000/api/students", httpOptions);
 }
 
+getRecent() {
+  return this.http.get('http://localhost:3000/api/students/recent', httpOptions);
+}
+
+
 getAssignments() {
   return this.http.get("http://localhost:3000/api/assignments", httpOptions);
 }
@@ -65,7 +70,7 @@ getAssignments() {
     console.log(score);
     this.http
       .post(
-        "http://localhost:3000/api/assignmentScores",
+        "http://localhost:3000/api/assignmentscore",
         score, httpOptions
       )
       .subscribe(res => {
@@ -109,5 +114,6 @@ getAssignments() {
       console.log(res);
     });
   }
+
 
 }

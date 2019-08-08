@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewInit, OnChanges, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, OnChanges, Input, ElementRef, Renderer2 } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms'
 import { PostsService } from '../posts.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -19,10 +19,48 @@ const httpOptions = {
   templateUrl: './grades-form.component.html',
   styleUrls: ['./grades-form.component.css']
 })
-export class GradesFormComponent implements OnInit {
+export class GradesFormComponent implements OnInit, AfterViewInit {
+
+  // @ViewChild('fork', { static: false }) fork: any;
+
+  @ViewChild("tref", { static: false }) tref: ElementRef;
+  @ViewChild("tableRef", { static: false }) tableRef: ElementRef;
+  @ViewChild("endRow", { static: false }) endRow: ElementRef;
+
+  @ViewChild("myDiv", { static: false }) myDiv: ElementRef;
+
+  ngAfterViewInit(){
+    console.log(this.myDiv);
+    this.myDiv.nativeElement.innerHTML = "Hello Angular 8!";
+
+    const td = this.renderer.createElement('td');
+    console.log(td);
+    const span = this.renderer.createElement('span');
+    this.renderer.setProperty(span, 'innerText', '1234546789');
+    this.renderer.appendChild(td, span);
+    console.log(this.endRow);
+    // const parent = this.renderer.parentNode(this.endRow.nativeElement);
+    const parent = this.endRow.nativeElement.parentNode;
+    console.log(parent);
+    console.log(this.tref);
+    const nextSib = this.renderer.nextSibling(this.tref.nativeElement.nextSibling);
+
+    this.renderer.insertBefore(parent, td, nextSib);
+
+
+
+  }
+
+  // ngAfterViewInit() {
+  //   // outputs `I am span`
+  //   // console.log(this.fork);
+  //   // console.log(this.tref);
+  // }
+    
 
   @Input() thisCourse: any;
 
+  mostRecent: any;
   scoreMap = new Map();
   courseTitle: any;
   arrayForScoremap: any;
@@ -46,12 +84,16 @@ export class GradesFormComponent implements OnInit {
   constructor(private fb: FormBuilder, 
       private posting: PostsService, 
       private http: HttpClient, 
-      private data: ArrayServService) { }
-
+      private data: ArrayServService,
+      private renderer: Renderer2,
+      private element: ElementRef) { }
 
 
 
   ngOnInit() {
+
+    console.log(this.tref);
+
 
     console.log(`COURSE ID: ${this.thisCourse._id}`);
     this.courseTitle = this.thisCourse.title;
@@ -68,17 +110,19 @@ export class GradesFormComponent implements OnInit {
       assignmentTotal: []
     });
 
+
     this.posting.getStudents()
       .subscribe(item => {
-        console.log(item);
+        // console.log(item);
         this.studentsArray = item;
         this.studentsArray = this.studentsArray.filter(student => student.courseId == this.thisCourse._id);
-        console.log(this.studentsArray);
+        // console.log(this.studentsArray);
     })
+    console.log(this.studentsArray);
 
     this.posting.getAssignments()
       .subscribe(item => {
-        console.log(item);
+        // console.log(item);
         this.assignmentsArray = item;
         this.assignmentsArray = this.assignmentsArray.filter(assign => assign.courseId == this.thisCourse._id);
     })
@@ -86,9 +130,9 @@ export class GradesFormComponent implements OnInit {
     this.gradesForm.get('student').valueChanges
     .pipe(debounceTime(2000))
     .subscribe(term => {
-      console.log(term);
-      console.log(this.nextStudent._id);
-      console.log(this.thisCourse);
+      // console.log(term);
+      // console.log(this.nextStudent._id);
+      // console.log(this.thisCourse);
       this.posting.updateStudent(this.nextStudent._id, term, this.thisCourse);
       this.posting.getStudents()
         .subscribe(item => {
@@ -120,29 +164,54 @@ export class GradesFormComponent implements OnInit {
     
     this.posting.getStudents()
     .subscribe(item => {
-      console.log(item);
+      console.log(this.tref);
+
+      // console.log(item);
       this.studentsArray = item;
       this.studentsArray = this.studentsArray.filter(student => student.courseId == this.thisCourse._id);
-      console.log(this.studentsArray);
+      // console.log(this.studentsArray);
 
       this.arrayForScoremap = this.studentsArray.filter(item => {
-        console.log(item);
+        // console.log(item);
          return this.thisCourse._id === item.courseId;
       })
-      console.log(this.arrayForScoremap[1]);
+      // console.log(this.arrayForScoremap[1]);
       this.arrayForScoremap.forEach(item => {
         this.scoreMap.set(item._id, '');
       })
       console.log(this.scoreMap);
+      console.log(this.tref);
+      console.log(this.tableRef);
+
+
       this.arrayForScoremap.forEach(item => {
-        console.log(item.name);
-        this.scores.push(0)
+        console.log(item);
+        const td = this.renderer.createElement('td');
+        console.log(td);
+        const span = this.renderer.createElement('span');
+        this.renderer.setProperty(span, 'innerText', '2');
+        this.renderer.appendChild(td, span);
+
+
+        const input = this.renderer.createElement('input');
+
+        // this.renderer.appendChild(td, span);
+        // this.renderer.appendChild(td, input);
+
+        this.renderer.appendChild(this.tref.nativeElement, td);  
       })
-      console.log(this.scores);
+  
+      // this.arrayForScoremap.forEach(item => {
+      //   // console.log(item.name);
+      //   this.scores.push(0)
+      // })
+      // console.log(this.scores);
 
   })
 
 }
+
+
 
 
 
@@ -165,7 +234,6 @@ export class GradesFormComponent implements OnInit {
       console.log(item);
       this.assignmentsArray = item;
       this.assignmentsArray = this.assignmentsArray.filter(assign => assign.courseId == this.thisCourse._id);
-      console.log(this.assignmentsArray);
     })
   }
 
@@ -228,7 +296,7 @@ export class GradesFormComponent implements OnInit {
 
   newAssignment(assignmentTitle, total) {
     console.log('newAssignment invoked');
-
+// console.log(this.total);
     console.log(assignmentTitle.value);
     console.log(total.value);
     console.log(this.thisCourse._id);
@@ -240,24 +308,36 @@ export class GradesFormComponent implements OnInit {
     };
     console.log(inputToJson);
     this.posting.submitAssignment(inputToJson);
+    this.getAssignments();
 
-    this.getStudents();
-    console.log(this.studentsArray);
-    if(this.studentsArray.length > 0) {
-      this.studentsArray.forEach(item => {
-        const scoreInputToJson = {
-          assignmentId: "poopyId",
-          studentId: item._id,
-          courseId: item.courseId,
-          score: 0
-        }
+    this.posting.getRecent()
+      .subscribe(item => {
+        this.mostRecent = item;
+        console.log(this.mostRecent.courseId);
+        console.log(item);
+        if(this.studentsArray.length > 0) {
+          this.studentsArray.forEach(item => {
+            const scoreInputToJson = {
+              assignmentId: this.mostRecent._id,
+              studentId: item._id,
+              courseId: item.courseId,
+              score: 0
+            };
+            const scoreArrayItem = {
+              assignmentId: this.mostRecent._id,
+              score: 2
+            };
+            console.log(scoreArrayItem);
+
         console.log(scoreInputToJson);
+        this.scores.push(scoreArrayItem);
+        console.log(this.scores);
         this.posting.submitAssignmentScore(scoreInputToJson);
       })
-    }
-
+    }});
     this.setScoresArray(); 
   }
+
 
 
 
@@ -287,8 +367,6 @@ export class GradesFormComponent implements OnInit {
     //   this.scores[i] = 0;
     // }
     console.log(this.scores);
-
-
   }
 
 

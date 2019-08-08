@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Renderer2, AfterViewInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { PostsService } from './posts.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { AgGridAngular } from 'ag-grid-angular';
 
 
 const httpOptions = {
@@ -16,11 +17,13 @@ const httpOptions = {
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit, AfterViewInit {
+
+
 
   coursesArray: any;
 
-  constructor(private fb: FormBuilder, private posting: PostsService, private http: HttpClient) {}
+  constructor(private fb: FormBuilder, private posting: PostsService, private http: HttpClient, renderer2: Renderer2) {}
 
   ngOnInit() {
 
@@ -40,6 +43,9 @@ export class AppComponent implements OnInit{
 
   }
 
+  ngAfterViewInit() {
+  }
+
   courseForm: FormGroup;
 
 
@@ -48,8 +54,6 @@ export class AppComponent implements OnInit{
   // courseTitles: string[] = [
   //   'Communications 42', 'Communications w/ Aliens 51', 'Physics 101'
   // ]
-
-
 
   currentCourse: any;
 
@@ -67,4 +71,28 @@ export class AppComponent implements OnInit{
     console.log('submitCourseTitle is gettin invoked all up in here yo');
     this.posting.submitCourse(inputToJson)
   }
+
+  @ViewChild('agGrid', { static: false }) agGrid: AgGridAngular;
+
+
+  columnDefs = [
+    {headerName: 'Assignment', field: 'assignment', sortable: true, filter: true, checkboxSelection: true },
+    {headerName: 'Total Possible', field: 'total possible', sortable: true, filter: true },
+    {headerName: 'Student Name', field: 'student name', sortable: true, filter: true }
+];
+
+  rowData = [
+      { Assignment: 'Exam', totalPossible: 42 },
+      { Assignment: 'Final', totalPossible: 420},
+      { Assignment: 'Persuasive Essay', totalPossible: 777 }
+  ];
+
+
+  getSelectedRows() {
+    const selectedNodes = this.agGrid.api.getSelectedNodes();
+    const selectedData = selectedNodes.map( node => node.data );
+    const selectedDataStringPresentation = selectedData.map( node => node.make + ' ' + node.model).join(', ');
+    alert(`Selected nodes: ${selectedDataStringPresentation}`);
+}
+
 }
