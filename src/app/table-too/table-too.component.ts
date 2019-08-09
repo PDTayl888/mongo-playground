@@ -12,6 +12,9 @@ import { TableModule } from 'primeng/table';
 })
 export class TableTooComponent implements OnInit {
 
+    cols: any[];
+
+
 
     headers: string[] = ['assignments', 'total Possible', 'Gary Indiana', 'Frankie FartKnuckle'];
 
@@ -24,14 +27,21 @@ export class TableTooComponent implements OnInit {
             {"assignment": "English 42", "total": "42", "studentName1": "Gary Indiana", "studentName2": "Harry Henderson"},
             {"assignment": "English 666", "total": "42", "studentName1": "Gary Indiana", "studentName2": "Larry Schmindiana"},
             {"assignment": "English 777", "total": "42", "studentName1": "Gary Indiana", "studentName2": "Larry Schmindiana"}
-        ];
+    ];
+
+
     
 
     constructor() { }
 
     ngOnInit() {
         // this.carService.getCarsSmall().then(cars => this.cars1 = cars);
-
+       this.cols = [
+            { field: 'assignment', header: 'Assignments' },
+            {field: 'total', header: 'Total' },
+            { field: '0', header: 'studentName1' },
+            { field: '0', header: 'studentName2' }
+        ];
     }
 
     
