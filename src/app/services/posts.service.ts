@@ -17,10 +17,15 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class PostsService {
+  results: any[];
+
 
   constructor(private http: HttpClient) { }
+  
+
 
 getCourses() {
+  console.log('getCourses invoked');
   return this.http.get("http://localhost:3000/api/courses", httpOptions);
 }
 
@@ -32,9 +37,15 @@ getRecent() {
   return this.http.get('http://localhost:3000/api/students/recent', httpOptions);
 }
 
+shit() {
+  console.log("fartknocker ##########");
+  return "poop";
+}
 
-getAssignments() {
-  return this.http.get("http://localhost:3000/api/assignments", httpOptions);
+
+async getAssignments() {
+  return await this.http.get("http://localhost:3000/api/assignments", httpOptions).toPromise();
+ 
 }
 
 

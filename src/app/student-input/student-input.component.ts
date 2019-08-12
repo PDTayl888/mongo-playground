@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map, catchError, debounceTime } from 'rxjs/operators';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { PostsService } from '../posts.service';
+import { PostsService } from '../services/posts.service';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms'
 
 const httpOptions = {

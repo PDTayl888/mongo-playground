@@ -1,5 +1,5 @@
 <!-- <student-input></student-input> -->
-<!-- <hr>
+<!-- <hr> -->
 
 
 <div [formGroup]="courseForm">
@@ -10,13 +10,8 @@
 formControlName="courseTitle">
 </div>
 <hr>
-<grades-form [thisCourse]="course" (focus)="emitCourse(course)" *ngFor="let course of coursesArray"></grades-form> -->
 <hr>
-<hr>
-<hr>
-<hr>
-<hr>
-<app-table-too></app-table-too>
+<app-table-too [thisCourse]="course"  *ngFor="let course of coursesArray"></app-table-too>
 
 <!-- <ag-grid-angular 
     #agGrid

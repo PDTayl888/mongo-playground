@@ -1,9 +1,8 @@
 import { Component, OnInit, ViewChild, AfterViewInit, OnChanges, Input, ElementRef, Renderer2 } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms'
-import { PostsService } from '../posts.service';
+import { PostsService } from '../services/posts.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map, catchError, debounceTime } from 'rxjs/operators';
-import { ArrayServService } from '../array-serv.service';
 
 
 const httpOptions = {
@@ -47,9 +46,8 @@ export class GradesFormComponent implements OnInit, AfterViewInit {
 
     this.renderer.insertBefore(parent, td, nextSib);
 
-
-
   }
+
 
   // ngAfterViewInit() {
   //   // outputs `I am span`
@@ -70,6 +68,7 @@ export class GradesFormComponent implements OnInit, AfterViewInit {
   assignmentsArray: any;
   studentsArray: any;
   nextStudent: any;
+  nextCourse: any; 
   nextAssignment: any;
   nextScore: any;
   nextTotal: any;
@@ -84,7 +83,6 @@ export class GradesFormComponent implements OnInit, AfterViewInit {
   constructor(private fb: FormBuilder, 
       private posting: PostsService, 
       private http: HttpClient, 
-      private data: ArrayServService,
       private renderer: Renderer2,
       private element: ElementRef) { }
 
@@ -120,12 +118,12 @@ export class GradesFormComponent implements OnInit, AfterViewInit {
     })
     console.log(this.studentsArray);
 
-    this.posting.getAssignments()
-      .subscribe(item => {
-        // console.log(item);
-        this.assignmentsArray = item;
-        this.assignmentsArray = this.assignmentsArray.filter(assign => assign.courseId == this.thisCourse._id);
-    })
+    // this.posting.getAssignments()
+    //   .subscribe(item => {
+    //     // console.log(item);
+    //     this.assignmentsArray = item;
+    //     this.assignmentsArray = this.assignmentsArray.filter(assign => assign.courseId == this.thisCourse._id);
+    // })
 
     this.gradesForm.get('student').valueChanges
     .pipe(debounceTime(2000))
@@ -242,6 +240,13 @@ export class GradesFormComponent implements OnInit, AfterViewInit {
     console.log("emit Student");
     console.log(item.name);
     this.nextStudent = item;
+    console.log(this.nextStudent.courseId);
+  }
+
+  emitCourse(item) {
+    console.log("emit Course");
+    console.log(item.course);
+    this.nextCourse = item;
     console.log(this.nextStudent.courseId);
   }
 

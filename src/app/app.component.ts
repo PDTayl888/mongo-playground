@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef, Renderer2, AfterViewInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { PostsService } from './posts.service';
+import { PostsService } from './services/posts.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AgGridAngular } from 'ag-grid-angular';
 
@@ -39,7 +39,6 @@ export class AppComponent implements OnInit, AfterViewInit {
         this.coursesArray = item;
         console.log(this.coursesArray);
       })
-  
 
   }
 
@@ -88,11 +87,5 @@ export class AppComponent implements OnInit, AfterViewInit {
   ];
 
 
-  getSelectedRows() {
-    const selectedNodes = this.agGrid.api.getSelectedNodes();
-    const selectedData = selectedNodes.map( node => node.data );
-    const selectedDataStringPresentation = selectedData.map( node => node.make + ' ' + node.model).join(', ');
-    alert(`Selected nodes: ${selectedDataStringPresentation}`);
-}
 
 }

@@ -1,10 +1,36 @@
+<button (click)="addCol(field, header)">ADD</button>
+<input #field type="text">
+<input #header type="text">
+<button (click)="poop()">poop</button>
+
+<hr>
+<button (click)="newStudent(studentName)">ADD STUDENT</button>
+<input 
+#studentName
+type="text">
+<hr>
+
+<hr>
+<button (click)="newAssignment(assignmentTitle, total)">ADD ASSIGNMENT</button>
+<input 
+#assignmentTitle
+type="text">
+<input
+#total
+type="text">
+<input #fork>
+<hr>
+<p>Hello World Hello World</p>
+<span>I am span</span>
+<div #myDiv></div>
 
 
 <div class="content-section implementation">
 
-    <h3 class="first">Cell Editing</h3>
+
+    <h1 class="first">{{ thisCourse.title }}</h1>
     <p-table [columns]="cols" [value]="students">
-        <ng-template pTemplate="cols" let-columns>
+        <ng-template pTemplate="header" let-columns>
             <tr>
                 <th *ngFor="let col of columns">{{ col.header }}</th>
             </tr>
@@ -24,8 +50,11 @@
             </tr>
         </ng-template>
     </p-table>
+<hr>
+<hr>
+<button (click)="showData(this.students)">SHOW DATA ARRAY</button>
 
-
+<!-- rowData, rowData[col.field -->
 
 
     <!-- <td pEditableColumn>
