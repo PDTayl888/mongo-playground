@@ -29,12 +29,25 @@ getCourses() {
   return this.http.get("http://localhost:3000/api/courses", httpOptions);
 }
 
+async getCoursesPromise() {
+  console.log('getCourses invoked');
+  return await this.http.get("http://localhost:3000/api/courses", httpOptions).toPromise();
+}
+
 getStudents() {
   return this.http.get("http://localhost:3000/api/students", httpOptions);
 }
 
+async getStudentsPromise() {
+  return await this.http.get("http://localhost:3000/api/students", httpOptions).toPromise();
+}
+
 getRecent() {
   return this.http.get('http://localhost:3000/api/students/recent', httpOptions);
+}
+
+async getRecentPromise() {
+  return await this.http.get('http://localhost:3000/api/students/recent', httpOptions).toPromise();
 }
 
 shit() {
@@ -43,9 +56,12 @@ shit() {
 }
 
 
-async getAssignments() {
+async getAssignmentsPromise() {
   return await this.http.get("http://localhost:3000/api/assignments", httpOptions).toPromise();
- 
+}
+
+getAssignments() {
+  return this.http.get("http://localhost:3000/api/assignments", httpOptions);
 }
 
 
