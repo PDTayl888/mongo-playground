@@ -1,26 +1,48 @@
 import { TableModule } from 'primeng/table';
-import { Component, OnInit, ViewChild, AfterViewInit, OnChanges, Input, ElementRef, Renderer2 } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, OnChanges, Input, ElementRef, Renderer2, SimpleChange, SimpleChanges } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms'
 import { PostsService } from '../services/posts.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map, catchError, debounceTime } from 'rxjs/operators';
+import { from, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-table-too',
   templateUrl: './table-too.component.html',
   styleUrls: ['./table-too.component.css']
 })
-export class TableTooComponent implements OnInit {
+export class TableTooComponent implements OnInit, OnChanges {
 
+  @Input() cols: any = [];
+  @Input() watchCols: Observable<any> = from(this.cols);
+  @Input() column: any;
+  @Input() value: any;
+  @Input() students: any = [];
+  @Input() watchStudents: Observable<any> = from(this.students);
   @Input() thisCourse: any;
   studentsArray: any;
   assignmentsArray: any;
 
-  public cols;
+  // public cols;
 
-  students = [];
+  // students = [];
     
   constructor(private post: PostsService) { }
+
+  changelog: any = [];
+
+  ngOnChanges(changes: SimpleChanges) {
+    console.log("ngOnChanges invoked");
+    console.log(JSON.stringify(changes));
+    for (const propName in changes) {
+      const change = changes[propName];
+      const to  = JSON.stringify(change.currentValue);
+      const from = JSON.stringify(change.previousValue);
+      const changeLog = `${propName}: changed from ${from} to ${to} `;
+      this.changelog.push(changeLog);
+ }
+}
+  
 
   async ngOnInit() {
 
@@ -77,6 +99,29 @@ export class TableTooComponent implements OnInit {
 
 
     
+  }
+
+  emit(data, arrayPosition, field) {
+    console.log("emit invoked");
+    console.log(data.value);
+    console.log(arrayPosition);
+    console.log(field);
+  }
+
+  changeDB() {
+  this.watchCols
+    .subscribe(res => {
+      console.log(res);
+    })
+  }
+
+  logCols() {
+    console.log(event);
+    console.log(this.cols);
+  }
+
+  logStudents() {
+    console.log(this.students);
   }
 
 

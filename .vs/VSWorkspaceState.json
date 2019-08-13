@@ -3,8 +3,9 @@
     "",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\grades-form"
+    "\\src\\app\\services",
+    "\\src\\app\\table-too"
   ],
-  "SelectedNode": "\\src\\app\\grades-form\\grades-form.component.ts",
+  "SelectedNode": "\\src\\app\\table-too\\table-too.component.ts",
   "PreviewInSolutionExplorer": false
 }

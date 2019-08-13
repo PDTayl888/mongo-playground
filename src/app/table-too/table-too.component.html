@@ -22,8 +22,8 @@ type="text">
 <hr>
 <p>Hello World Hello World</p>
 <span>I am span</span>
-<div #myDiv></div>
-
+<button (click)="logCols()">LOG COLS</button>
+<button (click)="logStudents()">LOG STUDENTS</button>
 
 <div class="content-section implementation">
 
@@ -40,7 +40,7 @@ type="text">
                 <td pEditableColumn *ngFor="let col of columns">
                     <p-cellEditor>
                         <ng-template pTemplate="input">
-                            <input pInputText type="text" [(ngModel)]="rowData[col.field]">
+                            <input pInputText type="text" [(ngModel)]="rowData[col.field]" (keydown.enter)="emit(data, rowData, col.field)" #data>
                         </ng-template>
                         <ng-template pTemplate="output">
                             {{rowData[col.field]}}
