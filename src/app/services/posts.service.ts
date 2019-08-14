@@ -43,11 +43,11 @@ async getStudentsPromise() {
 }
 
 getRecent() {
-  return this.http.get('http://localhost:3000/api/students/recent', httpOptions);
+  return this.http.get('http://localhost:3000/api/assignments/recent', httpOptions);
 }
 
 async getRecentPromise() {
-  return await this.http.get('http://localhost:3000/api/students/recent', httpOptions).toPromise();
+  return await this.http.get('http://localhost:3000/api/assignments/recent', httpOptions).toPromise();
 }
 
 shit() {
@@ -57,11 +57,22 @@ shit() {
 
 
 async getAssignmentsPromise() {
+  console.log('getAssignmentsPromise invoked in postService');
+
   return await this.http.get("http://localhost:3000/api/assignments", httpOptions).toPromise();
 }
 
+
 getAssignments() {
   return this.http.get("http://localhost:3000/api/assignments", httpOptions);
+}
+
+async getAssignmentScorePromise() {
+  return await this.http.get("http://localhost:3000/api/assignmentscore", httpOptions).toPromise();
+}
+
+getAssignmentScore() {
+  return this.http.get("http://localhost:3000/api/assignmentscore", httpOptions);
 }
 
 
@@ -107,15 +118,13 @@ getAssignments() {
   }
 
   submitAssignment(title: any) {
-    console.log(title);
-    console.log("submitAsignment invoked");
-    this.http
-    .post("http://localhost:3000/api/assignments",
-    title, httpOptions
-    )
-    .subscribe(res => {
-      console.log(res);
-    })
+      console.log(title);
+      console.log("submitAsignment invoked");
+      this.http
+          .post("http://localhost:3000/api/assignments", title, httpOptions)
+          .subscribe(res => {
+          console.log(res);
+      })
   }
 
   submitStudent(title: any) {

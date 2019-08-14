@@ -22,7 +22,9 @@ export class TableTooComponent implements OnInit, OnChanges {
   @Input() thisCourse: any;
   studentsArray: any;
   assignmentsArray: any;
-
+  assignmentsScoreArray: any;
+  http: any;
+  mostRecent: any;
   // public cols;
 
   // students = [];
@@ -43,6 +45,10 @@ export class TableTooComponent implements OnInit, OnChanges {
  }
 }
   
+// **********************************************************************
+// *********************************************************************
+// ********************************************************************
+// NGONINIT RIGHT HERE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
   async ngOnInit() {
 
@@ -53,94 +59,174 @@ export class TableTooComponent implements OnInit, OnChanges {
       { field: 'total', header: 'Total' },
     ];
 
-    await this.post.getAssignmentsPromise()
-      .then(res => {
-        console.log(res);
-        this.assignmentsArray = res;
-      });
-      console.log("ASSIGN: " + this.assignmentsArray);
 
-    this.assignmentsArray = this.assignmentsArray.filter(assignment => 
-    assignment.courseId == this.thisCourse._id);
-    console.log("ASSIGN_AFTER: " + this.assignmentsArray);
-
+  
         
     await this.post.getStudentsPromise()
       .then(item => {
-        console.log(item);
+        // console.log(item);
         this.studentsArray = item;
       });
-    console.log(this.studentsArray);
+    // console.log(this.studentsArray);
 
     this.studentsArray = this.studentsArray.filter(student => 
       student.courseId == this.thisCourse._id);
-      console.log(this.studentsArray);
+      // console.log(this.studentsArray);
         
       this.studentsArray.forEach((student, i) => {
         const studentNumber = i + 1;
         console.log(studentNumber);
         const newHeaderField = { field: `studentName${studentNumber}`, header: `${student.name}`};
         this.cols.push(newHeaderField);
-        console.log(this.cols);
+        // console.log(this.cols);
       })
+
+
+    await this.post.getAssignmentsPromise()
+      .then(res => {
+        // console.log(res);
+        this.assignmentsArray = res;
+      });
+    console.log(this.assignmentsArray);
+
+    this.assignmentsArray = this.assignmentsArray.filter(assignment => 
+    assignment.courseId == this.thisCourse._id);
+    // console.log(this.assignmentsArray);
+
+    await this.post.getAssignmentScorePromise()
+      .then(res => {
+        // console.log("getAssignmentScorePromise invoked in table-too");
+        // console.log(res);
+        this.assignmentsScoreArray = res;
+      });
+    // console.log(this.assignmentsScoreArray);
+
+    this.assignmentsScoreArray = this.assignmentsScoreArray.filter(item => {
+      // console.log(item.courseId);
+      // console.log(this.thisCourse._id);
+      return item.courseId == this.thisCourse._id;
+    });
+    // console.log(this.assignmentsScoreArray);
+
   
-        
+
     this.assignmentsArray.forEach(assign => {
       const newData = { assignment: `${assign.title}`, total: `${assign.total}`, }
       console.log(this.studentsArray);
-      this.studentsArray.forEach((student, i) => {
+
+      this.assignmentsScoreArray = this.assignmentsScoreArray.filter(item => {
+        console.log(item.assignmentId);
+        console.log(assign._id);
+        return item.assignmentId == assign._id;
+      });
+      console.log("POOOOOOOOOOPPPPP");
+      console.log(this.assignmentsScoreArray);
+  
+      this.assignmentsScoreArray.forEach((student, i) => {
       const studentNumber = i + 1;
-      newData[`studentName${studentNumber}`] = '0';
+      newData[`studentName${studentNumber}`] = student.score;
     })
     this.students.push(newData);
     console.log(this.students);
     })
-
-
-
     
   }
 
-  emit(data, arrayPosition, field) {
-    console.log("emit invoked");
-    console.log(data.value);
-    console.log(arrayPosition);
-    console.log(field);
+// ********************************************************************
+// *********************************************************************
+// **********************************************************************
+
+
+
+
+
+
+
+  async newStudent(studentName) {
+    console.log(studentName.value);
+    console.log(this.thisCourse._id);
+    const inputToJson = {
+      name: studentName.value,
+      courseId: this.thisCourse._id
+    };
+    console.log('submitStudentTitle is gettin invoked all up in here yo');
+    this.post.submitStudent(inputToJson);
   }
 
-  changeDB() {
-  this.watchCols
-    .subscribe(res => {
-      console.log(res);
+
+
+
+  async newAssignment(assignmentTitle, total) {
+    console.log(total);
+    const inputToJson = 
+    {
+      title: assignmentTitle.value,
+      total: total.value,
+      courseId: this.thisCourse._id
+    };
+    console.log(inputToJson);
+    this.post.submitAssignment(inputToJson);
+
+    await this.post.getRecentPromise()
+        .then(res => {
+          this.mostRecent = res;
+          console.log(this.mostRecent);
+        });
+    console.log(this.mostRecent);
+
+    this.studentsArray = this.studentsArray.filter(student => 
+      student.courseId == this.thisCourse._id);
+
+
+    this.studentsArray.forEach(item => {
+      const inputToJson = {
+        assignmentId: this.mostRecent._id,
+        studentId: item._id,
+        courseId: this.thisCourse._id,
+        score: 0
+      }
+      this.post.submitAssignmentScore(inputToJson);
     })
   }
 
-  logCols() {
-    console.log(event);
-    console.log(this.cols);
-  }
-
-  logStudents() {
-    console.log(this.students);
-  }
 
 
-  addCol(newField, newHeader) {
-    console.log(newField.value);
-    const newColObject = { field: `${newField.value}`, header: `${newHeader.value}`};
-    console.log(newColObject);
-    this.cols.push(newColObject);
-    console.log(this.cols);
-    const newRowObject =  { assignment: "English 777", total: "42",studentName1: '998', studentName2: `${newField.value}` };
-    console.log(newRowObject);
-    this.students.push(newRowObject);
-    console.log(this.students);
-  }
 
-  showData(array) {
-    console.log("showData invoked");
-    console.log(array);
-  }
+
+
+
+
+  changeDB() {
+    this.watchCols
+      .subscribe(res => {
+        console.log(res);
+      })
+    }
+  
+    logCols() {
+      console.log(event);
+      console.log(this.cols);
+    }
+  
+    logStudents() {
+      console.log(this.students);
+    }
+
+    emit(data, arrayPosition, field) {
+      console.log("emit invoked");
+      console.log(data.value);
+      console.log(arrayPosition);
+      console.log(field);
+    }
+    
+    showData(array) {
+      console.log("showData invoked");
+      console.log(array);
+    }
+  
+  
+
+
     
 }
 
