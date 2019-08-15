@@ -177,6 +177,9 @@ export class TableTooComponent implements OnInit, OnChanges {
         this.post.submitAssignmentScore(inputToJson);
       })
 
+      this.cols = [];
+      this.students = [];
+
       this.refresh();
 
       // setTimeout(()=>{console.log("TEST VIEW UPDATE THEORY");}, 0);
@@ -217,6 +220,9 @@ export class TableTooComponent implements OnInit, OnChanges {
       }
       this.post.submitAssignmentScore(inputToJson);
     })
+
+    this.cols = [];
+    this.students = [];
 
 
     this.refresh();
