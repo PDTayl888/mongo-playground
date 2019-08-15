@@ -21,10 +21,13 @@ export class TableTooComponent implements OnInit, OnChanges {
   @Input() watchStudents: Observable<any> = from(this.students);
   @Input() thisCourse: any;
   studentsArray: any;
+  studentsArrayFiltered: any;
   assignmentsArray: any;
   assignmentsScoreArray: any;
   http: any;
   mostRecent: any;
+  assignmentsScoreArrayToo: any;
+  assignmentsArrayFiltered: any;
   // public cols;
 
   // students = [];
@@ -112,9 +115,9 @@ export class TableTooComponent implements OnInit, OnChanges {
 
     this.assignmentsArray.forEach(assign => {
       const newData = { assignment: `${assign.title}`, total: `${assign.total}`, }
-      console.log(this.studentsArray);
+      console.log(newData);
 
-      this.assignmentsScoreArray = this.assignmentsScoreArray.filter(item => {
+      this.assignmentsScoreArrayToo = this.assignmentsScoreArray.filter(item => {
         console.log(item.assignmentId);
         console.log(assign._id);
         return item.assignmentId == assign._id;
@@ -122,8 +125,10 @@ export class TableTooComponent implements OnInit, OnChanges {
       console.log("POOOOOOOOOOPPPPP");
       console.log(this.assignmentsScoreArray);
   
-      this.assignmentsScoreArray.forEach((student, i) => {
+      this.assignmentsScoreArrayToo.forEach((student, i) => {
+        console.log(student.score);
       const studentNumber = i + 1;
+      console.log(studentNumber);
       newData[`studentName${studentNumber}`] = student.score;
     })
     this.students.push(newData);
@@ -151,6 +156,27 @@ export class TableTooComponent implements OnInit, OnChanges {
     };
     console.log('submitStudentTitle is gettin invoked all up in here yo');
     this.post.submitStudent(inputToJson);
+
+    await this.post.getRecentStudentPromise()
+    .then(res => {
+      this.mostRecent = res;
+      console.log(this.mostRecent);
+    });
+    console.log(this.mostRecent);
+
+    this.assignmentsArrayFiltered = this.assignmentsArray.filter(assignment => 
+      assignment.courseId == this.thisCourse._id);
+
+      this.assignmentsArrayFiltered.forEach(item => {
+        const inputToJson = {
+          assignmentId: item._id,
+          studentId: this.mostRecent._id,
+          courseId: this.thisCourse._id,
+          score: 0
+        }
+        this.post.submitAssignmentScore(inputToJson);
+      })
+  
   }
 
 
@@ -174,11 +200,11 @@ export class TableTooComponent implements OnInit, OnChanges {
         });
     console.log(this.mostRecent);
 
-    this.studentsArray = this.studentsArray.filter(student => 
+    this.studentsArrayFiltered = this.studentsArray.filter(student => 
       student.courseId == this.thisCourse._id);
 
 
-    this.studentsArray.forEach(item => {
+    this.studentsArrayFiltered.forEach(item => {
       const inputToJson = {
         assignmentId: this.mostRecent._id,
         studentId: item._id,

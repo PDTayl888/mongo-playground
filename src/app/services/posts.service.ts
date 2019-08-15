@@ -50,6 +50,10 @@ async getRecentPromise() {
   return await this.http.get('http://localhost:3000/api/assignments/recent', httpOptions).toPromise();
 }
 
+async getRecentStudentPromise() {
+  return await this.http.get('http://localhost:3000/api/students/recent', httpOptions).toPromise();
+}
+
 shit() {
   console.log("fartknocker ##########");
   return "poop";
