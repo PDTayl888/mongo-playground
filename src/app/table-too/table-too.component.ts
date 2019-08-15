@@ -176,6 +176,10 @@ export class TableTooComponent implements OnInit, OnChanges {
         }
         this.post.submitAssignmentScore(inputToJson);
       })
+
+      this.refresh();
+
+      // setTimeout(()=>{console.log("TEST VIEW UPDATE THEORY");}, 0);
   
   }
 
@@ -213,6 +217,13 @@ export class TableTooComponent implements OnInit, OnChanges {
       }
       this.post.submitAssignmentScore(inputToJson);
     })
+
+
+    this.refresh();
+
+    // setTimeout(()=>{console.log("TEST VIEW UPDATE THEORY");}, 0);
+
+    
   }
 
 
@@ -249,8 +260,90 @@ export class TableTooComponent implements OnInit, OnChanges {
       console.log("showData invoked");
       console.log(array);
     }
+
+
+
+
   
+  async refresh() {
+    console.log(` COURSE_ID: ${this.thisCourse._id}`);
+
+    this.cols = [
+      { field: 'assignment', header: 'Assignments' },
+      { field: 'total', header: 'Total' },
+    ];
+
+    await this.post.getStudentsPromise()
+      .then(item => {
+        // console.log(item);
+        this.studentsArray = item;
+      });
+    // console.log(this.studentsArray);
+
+    this.studentsArray = this.studentsArray.filter(student => 
+      student.courseId == this.thisCourse._id);
+      // console.log(this.studentsArray);
+        
+      this.studentsArray.forEach((student, i) => {
+        const studentNumber = i + 1;
+        console.log(studentNumber);
+        const newHeaderField = { field: `studentName${studentNumber}`, header: `${student.name}`};
+        this.cols.push(newHeaderField);
+        // console.log(this.cols);
+      })
+
+
+    await this.post.getAssignmentsPromise()
+      .then(res => {
+        // console.log(res);
+        this.assignmentsArray = res;
+      });
+    console.log(this.assignmentsArray);
+
+    this.assignmentsArray = this.assignmentsArray.filter(assignment => 
+    assignment.courseId == this.thisCourse._id);
+    // console.log(this.assignmentsArray);
+
+    await this.post.getAssignmentScorePromise()
+      .then(res => {
+        // console.log("getAssignmentScorePromise invoked in table-too");
+        // console.log(res);
+        this.assignmentsScoreArray = res;
+      });
+    // console.log(this.assignmentsScoreArray);
+
+    this.assignmentsScoreArray = this.assignmentsScoreArray.filter(item => {
+      // console.log(item.courseId);
+      // console.log(this.thisCourse._id);
+      return item.courseId == this.thisCourse._id;
+    });
+    // console.log(this.assignmentsScoreArray);
+
   
+
+    this.assignmentsArray.forEach(assign => {
+      const newData = { assignment: `${assign.title}`, total: `${assign.total}`, }
+      console.log(newData);
+
+      this.assignmentsScoreArrayToo = this.assignmentsScoreArray.filter(item => {
+        console.log(item.assignmentId);
+        console.log(assign._id);
+        return item.assignmentId == assign._id;
+      });
+      console.log("POOOOOOOOOOPPPPP");
+      console.log(this.assignmentsScoreArray);
+  
+      this.assignmentsScoreArrayToo.forEach((student, i) => {
+        console.log(student.score);
+      const studentNumber = i + 1;
+      console.log(studentNumber);
+      newData[`studentName${studentNumber}`] = student.score;
+    })
+    this.students.push(newData);
+    console.log(this.students);
+    })
+
+  }
 
 
     
