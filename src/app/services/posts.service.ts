@@ -54,6 +54,11 @@ async getRecentStudentPromise() {
   return await this.http.get('http://localhost:3000/api/students/recent', httpOptions).toPromise();
 }
 
+async getRecentCoursePromise() {
+  console.log("getRecentCoursePromise invoked in service");
+  return await this.http.get('http://localhost:3000/api/courses/recent', httpOptions).toPromise();
+}
+
 shit() {
   console.log("fartknocker ##########");
   return "poop";

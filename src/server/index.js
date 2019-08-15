@@ -91,6 +91,30 @@ app.get('/api/students/recent', async (req, res) => {
     }
 });
 
+app.get('/api/courses/recent', async (req, res) => {
+    
+    try {
+        console.log("app.get courses latest");
+
+
+        Course.findOne()
+        .sort({ _id : -1 })
+        .limit(3)
+        .exec((err, data) => {
+            try {
+            console.log(data);
+            res.json(data)
+            } catch {
+                res.status(500).send(err);
+            }
+        }); 
+
+        // res.send(mostRecent);
+    } catch(error) {
+        res.status(500).send(error);
+    }
+});
+
 
 
 app.get('/api/students', async (req, res) => {

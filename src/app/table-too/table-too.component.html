@@ -39,7 +39,7 @@ type="text">
                 <td pEditableColumn *ngFor="let col of columns">
                     <p-cellEditor>
                         <ng-template pTemplate="input">
-                            <input pInputText type="text" [(ngModel)]="rowData[col.field]" (keydown.enter)="emit(data, rowData, col.field)" #data>
+                            <input pInputText type="text" [(ngModel)]="rowData[col.field]" (keydown.enter)="emit(data, rowData, col.field, students, col)" #data>
                         </ng-template>
                         <ng-template pTemplate="output">
                             {{rowData[col.field]}}

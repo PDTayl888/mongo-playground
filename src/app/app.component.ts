@@ -19,11 +19,13 @@ const httpOptions = {
 })
 export class AppComponent implements OnInit, AfterViewInit {
 
+  recentCourse: any;
+
 
 
   coursesArray: any;
 
-  constructor(private fb: FormBuilder, private posting: PostsService, private http: HttpClient, renderer2: Renderer2) {}
+  constructor(private fb: FormBuilder, private post: PostsService, private http: HttpClient, renderer2: Renderer2) {}
 
   ngOnInit() {
 
@@ -61,14 +63,23 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.currentCourse = course;
   }
 
-  addCourseTitle(course) {
+  async addCourseTitle(course) {
     console.log(course);
     const inputToJson = {
       title: course
     }
     console.log(inputToJson);
     console.log('submitCourseTitle is gettin invoked all up in here yo');
-    this.posting.submitCourse(inputToJson)
+    this.post.submitCourse(inputToJson)
+
+    await this.post.getRecentCoursePromise()
+      .then(res => {
+        this.recentCourse = res;
+      })
+
+    console.log(this.recentCourse);
+    this.coursesArray.push(this.recentCourse);
+    console.log(this.coursesArray);
   }
 
   @ViewChild('agGrid', { static: false }) agGrid: AgGridAngular;

@@ -224,11 +224,9 @@ export class TableTooComponent implements OnInit, OnChanges {
     this.cols = [];
     this.students = [];
 
-
     this.refresh();
 
     // setTimeout(()=>{console.log("TEST VIEW UPDATE THEORY");}, 0);
-
     
   }
 
@@ -255,11 +253,22 @@ export class TableTooComponent implements OnInit, OnChanges {
       console.log(this.students);
     }
 
-    emit(data, arrayPosition, field) {
+    emit(data, arrayPosition, field, students, col) {
+      console.log(col);
+      console.log(this.cols.indexOf(col));
+      const studentIndex = this.cols.indexOf(col) - 2;
+      console.log(studentIndex);
       console.log("emit invoked");
       console.log(data.value);
-      console.log(arrayPosition);
+      console.log(arrayPosition.assignment);
       console.log(field);
+      console.log(students);
+      console.log(students.indexOf(arrayPosition));
+      console.log(students[students.indexOf(arrayPosition)][field]);
+      console.log(this.studentsArray);
+      console.log(this.studentsArray[studentIndex]);
+     const foundScore = this.assignmentsScoreArray.find(this.studentsArray[studentIndex]);
+     console.log(foundScore);
     }
     
     showData(array) {
