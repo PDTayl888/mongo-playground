@@ -237,12 +237,6 @@ export class TableTooComponent implements OnInit, OnChanges {
 
 
 
-  changeDB() {
-    this.watchCols
-      .subscribe(res => {
-        console.log(res);
-      })
-    }
   
     logCols() {
       console.log(event);
@@ -256,8 +250,10 @@ export class TableTooComponent implements OnInit, OnChanges {
 
 
     emit(data, arrayPosition, field, students, col) {
+      console.log(this.cols);
       console.log(col);
       console.log(this.cols.indexOf(col));
+      let columnIndex = this.cols.indexOf(col);
       const studentIndex = this.cols.indexOf(col) - 2;
       console.log(studentIndex);
       console.log("emit invoked");
@@ -271,44 +267,56 @@ export class TableTooComponent implements OnInit, OnChanges {
       console.log(this.studentsArray);
       console.log(this.studentsArray[studentIndex]);
 
-      this.assignmentsArrayFiltered = this.assignmentsArray.filter(assignment => 
-        assignment.courseId == this.thisCourse._id);
-
-      console.log(this.assignmentsArrayFiltered);
-      console.log(this.assignmentsArrayFiltered[assignIndex]);
-
-      console.log(this.studentsArray[0].courseId);
-      console.log(this.thisCourse._id);
-
-
+      console.log(columnIndex);
+      if (columnIndex == 0) {
+        console.log("COLUMN INDEX IS " + columnIndex);
+      } 
+      if (columnIndex == 1) {
+        console.log("COLUMN INDEX IS " + columnIndex);
+      }
+      if (columnIndex >= 2) {
+        this.assignmentsArrayFiltered = this.assignmentsArray.filter(assignment => 
+          assignment.courseId == this.thisCourse._id);
+  
+        console.log(this.assignmentsArrayFiltered);
+        console.log(this.assignmentsArrayFiltered[assignIndex]);
+  
+        console.log(this.studentsArray[0].courseId);
+        console.log(this.thisCourse._id);
+  
+  
         console.log(this.assignmentsScoreArray);
-
-     const foundScoreStudentId = this.assignmentsScoreArray.filter(item => {
-       return item.studentId == this.studentsArray[studentIndex]._id 
-     });
-     console.log(foundScoreStudentId[1].assignmentId);
-     console.log(this.assignmentsArrayFiltered[assignIndex]._id);
-
-     const foundScore = foundScoreStudentId.find(item => {
-      return item.assignmentId == this.assignmentsArrayFiltered[assignIndex]._id;
-     })
-     console.log(foundScoreStudentId);
-     console.log(foundScore);
-     console.log(data.value);
-
-
-    const newScore = {
-      assignmentId: foundScore.assignmentId,
-      studentId: foundScore.studentId,
-      courseId: foundScore.courseId,
-      score: data.value
-    };
-
-    console.log(newScore);
-    console.log(foundScore._id);
-
-      this.post.updateAssignmentScore(foundScore._id, newScore);
+  
+        const foundScoreStudentId = this.assignmentsScoreArray.filter(item => {
+         return item.studentId == this.studentsArray[studentIndex]._id 
+        });
+        console.log(foundScoreStudentId[1].assignmentId);
+        console.log(this.assignmentsArrayFiltered[assignIndex]._id);
+  
+        const foundScore = foundScoreStudentId.find(item => {
+        return item.assignmentId == this.assignmentsArrayFiltered[assignIndex]._id;
+        })
+        console.log(foundScoreStudentId);
+        console.log(foundScore);
+        console.log(data.value);
+  
+  
+        const newScore = {
+        assignmentId: foundScore.assignmentId,
+        studentId: foundScore.studentId,
+        courseId: foundScore.courseId,
+        score: data.value
+        };
+  
+        console.log(newScore);
+        console.log(foundScore._id);
+  
+        this.post.updateAssignmentScore(foundScore._id, newScore);
+      }
+      
     }
+
+
     
     showData(array) {
       console.log("showData invoked");
@@ -346,7 +354,6 @@ export class TableTooComponent implements OnInit, OnChanges {
         // console.log(this.cols);
       })
 
-
     await this.post.getAssignmentsPromise()
       .then(res => {
         // console.log(res);
@@ -372,8 +379,6 @@ export class TableTooComponent implements OnInit, OnChanges {
       return item.courseId == this.thisCourse._id;
     });
     // console.log(this.assignmentsScoreArray);
-
-  
 
     this.assignmentsArray.forEach(assign => {
       const newData = { assignment: `${assign.title}`, total: `${assign.total}`, }
