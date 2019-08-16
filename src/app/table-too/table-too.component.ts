@@ -253,6 +253,8 @@ export class TableTooComponent implements OnInit, OnChanges {
       console.log(this.students);
     }
 
+
+
     emit(data, arrayPosition, field, students, col) {
       console.log(col);
       console.log(this.cols.indexOf(col));
@@ -264,11 +266,48 @@ export class TableTooComponent implements OnInit, OnChanges {
       console.log(field);
       console.log(students);
       console.log(students.indexOf(arrayPosition));
+      const assignIndex = students.indexOf(arrayPosition);
       console.log(students[students.indexOf(arrayPosition)][field]);
       console.log(this.studentsArray);
       console.log(this.studentsArray[studentIndex]);
-     const foundScore = this.assignmentsScoreArray.find(this.studentsArray[studentIndex]);
+
+      this.assignmentsArrayFiltered = this.assignmentsArray.filter(assignment => 
+        assignment.courseId == this.thisCourse._id);
+
+      console.log(this.assignmentsArrayFiltered);
+      console.log(this.assignmentsArrayFiltered[assignIndex]);
+
+      console.log(this.studentsArray[0].courseId);
+      console.log(this.thisCourse._id);
+
+
+        console.log(this.assignmentsScoreArray);
+
+     const foundScoreStudentId = this.assignmentsScoreArray.filter(item => {
+       return item.studentId == this.studentsArray[studentIndex]._id 
+     });
+     console.log(foundScoreStudentId[1].assignmentId);
+     console.log(this.assignmentsArrayFiltered[assignIndex]._id);
+
+     const foundScore = foundScoreStudentId.find(item => {
+      return item.assignmentId == this.assignmentsArrayFiltered[assignIndex]._id;
+     })
+     console.log(foundScoreStudentId);
      console.log(foundScore);
+     console.log(data.value);
+
+
+    const newScore = {
+      assignmentId: foundScore.assignmentId,
+      studentId: foundScore.studentId,
+      courseId: foundScore.courseId,
+      score: data.value
+    };
+
+    console.log(newScore);
+    console.log(foundScore._id);
+
+      this.post.updateAssignmentScore(foundScore._id, newScore);
     }
     
     showData(array) {

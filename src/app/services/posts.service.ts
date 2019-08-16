@@ -19,7 +19,7 @@ const httpOptions = {
 export class PostsService {
   results: any[];
 
-
+  
   constructor(private http: HttpClient) { }
   
 
@@ -155,6 +155,14 @@ getAssignmentScore() {
       courseId: setCourseId
     }
     this.http.put("http://localhost:3000/api/students/" + id, fart)
+    .subscribe(res => {
+      console.log(res);
+    });
+  }
+
+  updateAssignmentScore(id: any, newScore: any) {
+    console.log('updateStudent service invoked');
+    this.http.put("http://localhost:3000/api/assignmentscore/" + id, newScore)
     .subscribe(res => {
       console.log(res);
     });
