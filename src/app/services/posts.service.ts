@@ -168,5 +168,13 @@ getAssignmentScore() {
     });
   }
 
+  updateAssignment(id: any, newAssignmentObject: any) {
+    console.log('updateAssignment service invoked');
+    this.http.put("http://localhost:3000/api/assignments/" + id, newAssignmentObject)
+    .subscribe(res => {
+      console.log(res);
+    });
+  }
+
 
 }

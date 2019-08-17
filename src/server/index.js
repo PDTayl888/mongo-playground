@@ -213,6 +213,19 @@ app.put('/api/assignmentscore/:id', async (req, res) => {
     res.send(assignmentscore);
 });
 
+app.put('/api/assignments/:id', async (req, res) => {
+    console.log('assignments PUT inVoked!!');
+    console.log(req.params.id);
+    const assignment = await Assignment.findByIdAndUpdate(req.params.id, 
+        {
+            title: req.body.title,
+            total: req.body.total,
+            courseId: req.body.courseId,
+        });
+  
+    res.send(assignment);
+});
+
 app.delete('/api/students/:id', async (req, res) => {
     console.log('remove student from DB invoked');
     console.log(req.params.id);
