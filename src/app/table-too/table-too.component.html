@@ -31,7 +31,10 @@ type="text">
     <p-table [columns]="cols" [value]="students">
         <ng-template pTemplate="header" let-columns>
             <tr>
-                <th *ngFor="let col of columns">{{ col.header }}</th>
+                <th *ngFor="let col of columns; index as i"
+                    (click)="isIconVisible()" >
+                    {{ col.header + " " }}<i [ngClass]="showIcon ? 'visible' : 'notVisible'" *ngIf="i>=2"class="far fa-edit"></i>
+                </th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-rowData let-columns="columns">

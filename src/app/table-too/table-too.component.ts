@@ -28,6 +28,7 @@ export class TableTooComponent implements OnInit, OnChanges {
   mostRecent: any;
   assignmentsScoreArrayToo: any;
   assignmentsArrayFiltered: any;
+  showIcon: boolean = true;
   // public cols;
 
   // students = [];
@@ -233,7 +234,21 @@ export class TableTooComponent implements OnInit, OnChanges {
 
 
 
+  // isIconVisible() {
+  //   console.log("isIconVisible");
+  //   this.showIcon = !this.showIcon;
+  // }
 
+
+  isIconVisible() {
+    console.log("isIconVisible");
+    this.showIcon = !this.showIcon;
+    console.log(this.showIcon);
+  }
+
+  editStudentName() {
+    console.log("editStudentName!");
+  }
 
 
 
