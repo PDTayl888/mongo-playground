@@ -4,6 +4,7 @@ import { map } from "rxjs/operators";
 import { Router } from "@angular/router";
 
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { identifierModuleUrl } from '@angular/compiler';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -84,7 +85,6 @@ getAssignmentScore() {
   return this.http.get("http://localhost:3000/api/assignmentscore", httpOptions);
 }
 
-
   // getCourses() {
   //   console.log("getCourses invoked");
   //   this.http
@@ -147,7 +147,6 @@ getAssignmentScore() {
     });
   }
 
-
   updateStudent(id: any, newName: any, setCourseId: any) {
     console.log('updateStudent service invoked');
     const fart = {
@@ -158,6 +157,15 @@ getAssignmentScore() {
     .subscribe(res => {
       console.log(res);
     });
+  }
+
+  removeStudent(id: any) {
+    console.log('remove student service invoked');
+    console.log(id);
+    this.http.delete("http://localhost:3000/api/students/" + id)
+      .subscribe(res => {
+        console.log(res);
+      })
   }
 
   updateAssignmentScore(id: any, newScore: any) {
@@ -175,6 +183,5 @@ getAssignmentScore() {
       console.log(res);
     });
   }
-
 
 }

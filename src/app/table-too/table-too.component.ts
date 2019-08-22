@@ -29,6 +29,10 @@ export class TableTooComponent implements OnInit, OnChanges {
   assignmentsScoreArrayToo: any;
   assignmentsArrayFiltered: any;
   showIcon: boolean = true;
+  showStudentName: boolean = false;
+  totalPossible: number = 420;
+  studentTotals: number[] = [21, 43]
+
   // public cols;
 
   // students = [];
@@ -131,9 +135,9 @@ export class TableTooComponent implements OnInit, OnChanges {
       const studentNumber = i + 1;
       console.log(studentNumber);
       newData[`studentName${studentNumber}`] = student.score;
-    })
-    this.students.push(newData);
-    console.log(this.students);
+      })
+        this.students.push(newData);
+        console.log(this.students);
     })
     
   }
@@ -141,10 +145,6 @@ export class TableTooComponent implements OnInit, OnChanges {
 // ********************************************************************
 // *********************************************************************
 // **********************************************************************
-
-
-
-
 
 
 
@@ -188,7 +188,7 @@ export class TableTooComponent implements OnInit, OnChanges {
   }
 
 
-
+// ADD ASSIGNMENT
 
   async newAssignment(assignmentTitle, total) {
     console.log(total);
@@ -222,16 +222,15 @@ export class TableTooComponent implements OnInit, OnChanges {
       this.post.submitAssignmentScore(inputToJson);
     })
 
-    this.cols = [];
+    // this.cols = [];
     this.students = [];
+
 
     this.refresh();
 
     // setTimeout(()=>{console.log("TEST VIEW UPDATE THEORY");}, 0);
     
   }
-
-
 
 
   // isIconVisible() {
@@ -246,13 +245,33 @@ export class TableTooComponent implements OnInit, OnChanges {
     console.log(this.showIcon);
   }
 
-  editStudentName() {
+  async editStudentName(data, arrayPosition, field, students, col) {
+    this.showStudentName = !this.showStudentName;
     console.log("editStudentName!");
+    console.log(this.cols);
+    console.log(col);
+    console.log(this.cols[col]);
+    const studentIndex = this.cols.indexOf(col) - 2;
+    console.log(studentIndex);
+
+    let studentsArr: any;
+    await this.post.getStudentsPromise()
+      .then(item => {
+        console.log(item);
+        studentsArr = item })
+        console.log(studentsArr);
+        console.log(studentsArr[studentIndex]);
+
+    console.log(studentsArr[studentIndex]._id);
+
+    this.post.removeStudent(studentsArr[studentIndex]._id);
+
+    this.refresh();
+
   }
 
-
-
-  
+    newName() {}
+ 
     logCols() {
       console.log(event);
       console.log(this.cols);
@@ -261,7 +280,6 @@ export class TableTooComponent implements OnInit, OnChanges {
     logStudents() {
       console.log(this.students);
     }
-
 
 
     emit(data, arrayPosition, field, students, col) {
@@ -378,18 +396,12 @@ export class TableTooComponent implements OnInit, OnChanges {
       
     }
 
-
-    
     showData(array) {
       console.log("showData invoked");
       console.log(array);
     }
-
-
-
-
   
-  async refresh() {
+    async refresh() {
     console.log(` COURSE_ID: ${this.thisCourse._id}`);
 
     this.cols = [
@@ -465,8 +477,6 @@ export class TableTooComponent implements OnInit, OnChanges {
     })
 
   }
-
-
     
 }
 

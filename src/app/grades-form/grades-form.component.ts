@@ -345,8 +345,6 @@ export class GradesFormComponent implements OnInit, AfterViewInit {
 
 
 
-
-
   setScoresArray() {
     this.getAssignments();
     console.log(this.studentsArray);
@@ -373,9 +371,6 @@ export class GradesFormComponent implements OnInit, AfterViewInit {
     // }
     console.log(this.scores);
   }
-
-
-
 
 
 
@@ -432,10 +427,5 @@ export class GradesFormComponent implements OnInit, AfterViewInit {
   ]
 
   fart: number = 12
-
-
-
-
-
 
 }

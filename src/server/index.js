@@ -86,16 +86,17 @@ app.get('/api/students/recent', async (req, res) => {
         }); 
 
         // res.send(mostRecent);
+        
     } catch(error) {
         res.status(500).send(error);
     }
+
 });
 
 app.get('/api/courses/recent', async (req, res) => {
     
     try {
         console.log("app.get courses latest");
-
 
         Course.findOne()
         .sort({ _id : -1 })
@@ -114,8 +115,6 @@ app.get('/api/courses/recent', async (req, res) => {
         res.status(500).send(error);
     }
 });
-
-
 
 app.get('/api/students', async (req, res) => {
     const student = await Student.find()
@@ -164,7 +163,6 @@ app.post('/api/courses', async (req, res) => {
         res.status(500).send(error);
     }
 });
-
 
 app.post('/api/assignmentscore', async (req, res) => {
     console.log("app.post assignmentScore called");
