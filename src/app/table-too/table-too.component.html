@@ -9,6 +9,7 @@
 #studentName
 type="text">
 <hr>
+<button (click)=sumTotalPossible()>parseInt</button>
 
 <hr>
 <button (click)="newAssignment(assignmentTitle, total)">ADD ASSIGNMENT</button>
@@ -58,7 +59,7 @@ type="text">
         <ng-template pTemplate="footer" let-totalsData>
             <tr>
                 <td>{{ "TOTALS" }}</td>
-                <td>{{ totalPossible }}</td>
+                <td>{{ assignmentsTotal }}</td>
                 <td *ngFor="let studentTotal of studentTotals">{{ studentTotal }}</td>
             </tr>    
         </ng-template>        

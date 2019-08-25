@@ -31,7 +31,9 @@ export class TableTooComponent implements OnInit, OnChanges {
   showIcon: boolean = true;
   showStudentName: boolean = false;
   totalPossible: number = 420;
-  studentTotals: number[] = [21, 43]
+  studentTotals: number[] = [];
+  assignmentsTotal: number = 0;
+
 
   // public cols;
 
@@ -139,7 +141,15 @@ export class TableTooComponent implements OnInit, OnChanges {
         this.students.push(newData);
         console.log(this.students);
     })
-    
+
+    this.assignmentsTotal = 0;
+
+    for(let i=0; i<this.assignmentsArray.length; i++) {
+      this.assignmentsTotal = this.assignmentsTotal + parseInt(this.assignmentsArray[i].total);
+    }
+
+    console.log(this.assignmentsTotal);
+
   }
 
 // ********************************************************************
@@ -425,7 +435,9 @@ export class TableTooComponent implements OnInit, OnChanges {
       console.log("showData invoked");
       console.log(array);
     }
-  
+    
+  // REFRESH
+
     async refresh() {
     console.log(` COURSE_ID: ${this.thisCourse._id}`);
 
@@ -501,7 +513,28 @@ export class TableTooComponent implements OnInit, OnChanges {
     // console.log(this.students);
     })
 
+    console.log(this.assignmentsTotal);
+
+    this.assignmentsTotal = 0;
+
+    for(let i=0; i<this.assignmentsArray.length; i++) {
+      this.assignmentsTotal = this.assignmentsTotal + parseInt(this.assignmentsArray[i].total);
+    }
+
+    console.log(this.assignmentsTotal);
+
+
   }
+
+
+  // sumTotalPossible() {
+  //   console.log(this.assignmentsArray);
+  //   for(let i=0; i<this.assignmentsArray.length; i++) {
+  //     this.assignmentsTotal = this.assignmentsTotal + parseInt(this.assignmentsArray[i].total);
+  //   }
+
+  //   console.log(this.assignmentsTotal);
+  // }
     
 }
 
