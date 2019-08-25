@@ -165,15 +165,23 @@ getAssignmentScore() {
     this.http.delete("http://localhost:3000/api/students/" + id)
       .subscribe(res => {
         console.log(res);
-      })
+    })
   }
 
   updateAssignmentScore(id: any, newScore: any) {
     console.log('updateStudent service invoked');
     this.http.put("http://localhost:3000/api/assignmentscore/" + id, newScore)
-    .subscribe(res => {
-      console.log(res);
+      .subscribe(res => {
+        console.log(res);
     });
+  }
+
+  removeStudentScore(id: any) {
+    console.log('removeStudentScores invoked in service');
+    this.http.delete("http://localhost:3000/api/assignmentscore/" + id)
+      .subscribe(res => {
+        console.log(res);
+    })
   }
 
   updateAssignment(id: any, newAssignmentObject: any) {

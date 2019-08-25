@@ -34,7 +34,7 @@ type="text">
         <ng-template pTemplate="header" let-columns>
             <tr>
                 <th *ngFor="let col of columns; index as i">
-                    {{ col.header + " " }}<i (click)="editStudentName(data, rowData, col.field, students, col)" 
+                    {{ col.header + " " }}<i (click)="removeStudentName(data, rowData, col.field, students, col)" 
                     [ngClass]="isVisible" 
                     *ngIf="i>=2" 
                     class="far fa-edit"></i>

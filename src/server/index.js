@@ -224,13 +224,22 @@ app.put('/api/assignments/:id', async (req, res) => {
     res.send(assignment);
 });
 
-app.delete('/api/students/:id', async (req, res) => {
+app.delete('/api/students/:id', async(req, res) => {
     console.log('remove student from DB invoked');
     console.log(req.params.id);
     const student = await Student.findByIdAndRemove(req.params.id);
 
     res.send(student);
 });
+
+app.delete('/api/assignmentscore/:id', async(req, res) => {
+    console.log('remove assignmentscore backend invoked');
+    console.log(req.params.id);
+
+    const assignmentscore = await AssignmentScore.findByIdAndRemove(req.params.id);
+
+    res.send(assignmentscore);
+})
 
 app.post('/api/students', async (req, res) => {
     

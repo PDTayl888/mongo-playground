@@ -245,7 +245,9 @@ export class TableTooComponent implements OnInit, OnChanges {
     console.log(this.showIcon);
   }
 
-  async editStudentName(data, arrayPosition, field, students, col) {
+
+
+  async removeStudentName(data, arrayPosition, field, students, col) {
     this.showStudentName = !this.showStudentName;
     console.log("editStudentName!");
     console.log(this.cols);
@@ -266,9 +268,32 @@ export class TableTooComponent implements OnInit, OnChanges {
 
     this.post.removeStudent(studentsArr[studentIndex]._id);
 
+    console.log(studentsArr[studentIndex]);
+    console.log(this.assignmentsScoreArray);
+
+    this.assignmentsScoreArray = this.assignmentsScoreArray.filter(item => {
+      // console.log(item.courseId);
+      // console.log(this.thisCourse._id);
+      return item.studentId == studentsArr[studentIndex]._id;
+    });
+
+    console.log(this.assignmentsScoreArray);
+
+    this.assignmentsScoreArray = this.assignmentsScoreArray.forEach(item => {
+      return this.post.removeStudentScore(item._id)
+    });
+
+    console.log(this.assignmentsScoreArray);
+
+    this.cols = [];
+    this.students = [];
+
     this.refresh();
 
   }
+
+
+
 
     newName() {}
  
@@ -422,7 +447,7 @@ export class TableTooComponent implements OnInit, OnChanges {
         
       this.studentsArray.forEach((student, i) => {
         const studentNumber = i + 1;
-        console.log(studentNumber);
+        // console.log(studentNumber);
         const newHeaderField = { field: `studentName${studentNumber}`, header: `${student.name}`};
         this.cols.push(newHeaderField);
         // console.log(this.cols);
@@ -456,24 +481,24 @@ export class TableTooComponent implements OnInit, OnChanges {
 
     this.assignmentsArray.forEach(assign => {
       const newData = { assignment: `${assign.title}`, total: `${assign.total}`, }
-      console.log(newData);
+      // console.log(newData);
 
       this.assignmentsScoreArrayToo = this.assignmentsScoreArray.filter(item => {
-        console.log(item.assignmentId);
-        console.log(assign._id);
+        // console.log(item.assignmentId);
+        // console.log(assign._id);
         return item.assignmentId == assign._id;
       });
       console.log("POOOOOOOOOOPPPPP");
       console.log(this.assignmentsScoreArray);
   
       this.assignmentsScoreArrayToo.forEach((student, i) => {
-        console.log(student.score);
+        // console.log(student.score);
       const studentNumber = i + 1;
-      console.log(studentNumber);
+      // console.log(studentNumber);
       newData[`studentName${studentNumber}`] = student.score;
     })
     this.students.push(newData);
-    console.log(this.students);
+    // console.log(this.students);
     })
 
   }
