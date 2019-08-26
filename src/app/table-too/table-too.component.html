@@ -30,7 +30,7 @@ type="text">
 <div class="content-section implementation">
 
 
-    <h1 class="first">{{ thisCourse.title }}</h1>
+    <h1 class="first">{{ thisCourse.title | uppercase }}</h1>
     <p-table [columns]="cols" [value]="students">
         <ng-template pTemplate="header" let-columns>
             <tr>
@@ -38,7 +38,7 @@ type="text">
                     {{ col.header + " " }}<i (click)="removeStudentName(data, rowData, col.field, students, col)" 
                     [ngClass]="isVisible" 
                     *ngIf="i>=2" 
-                    class="far fa-edit"></i>
+                    class="fa fa-times-circle"></i>
                 </th>
             </tr>
         </ng-template>

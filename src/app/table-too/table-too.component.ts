@@ -24,15 +24,16 @@ export class TableTooComponent implements OnInit, OnChanges {
   studentsArrayFiltered: any;
   assignmentsArray: any;
   assignmentsScoreArray: any;
-  http: any;
   mostRecent: any;
   assignmentsScoreArrayToo: any;
   assignmentsArrayFiltered: any;
   showIcon: boolean = true;
   showStudentName: boolean = false;
   totalPossible: number = 420;
+  // studentTotalScore: number = 0;
   studentTotals: number[] = [];
-  assignmentsTotal: number = 0;
+  assignmentsTotal: number;
+  studentScoreFiltered: any;
 
 
   // public cols;
@@ -142,13 +143,41 @@ export class TableTooComponent implements OnInit, OnChanges {
         console.log(this.students);
     })
 
+    this.studentsArray.forEach(student => {
+      let studentTotalScore: number = 0;
+      console.log(this.assignmentsScoreArray);
+      this.studentScoreFiltered = this.assignmentsScoreArray.filter(item => {
+        return item.studentId == student._id;
+      });
+      console.log(this.studentScoreFiltered);
+
+      for(let i=0; i<this.studentScoreFiltered.length; i++) {
+        studentTotalScore = studentTotalScore + parseInt(this.studentScoreFiltered[i].score)
+      }
+
+      this.studentTotals.push(studentTotalScore);
+
+      console.log(studentTotalScore);
+
+    })
+
     this.assignmentsTotal = 0;
+
+    // SUB TOTAL POSSIBLE COLUMN
 
     for(let i=0; i<this.assignmentsArray.length; i++) {
       this.assignmentsTotal = this.assignmentsTotal + parseInt(this.assignmentsArray[i].total);
     }
 
     console.log(this.assignmentsTotal);
+
+    // SUM STUDENT TOTAL COLUMNS
+
+    console.log(this.assignmentsScoreArray);
+
+
+
+
 
   }
 
@@ -255,7 +284,7 @@ export class TableTooComponent implements OnInit, OnChanges {
     console.log(this.showIcon);
   }
 
-
+// REMOVE STUDENT
 
   async removeStudentName(data, arrayPosition, field, students, col) {
     this.showStudentName = !this.showStudentName;
@@ -403,18 +432,21 @@ export class TableTooComponent implements OnInit, OnChanges {
         console.log(this.thisCourse._id);
         console.log(this.assignmentsScoreArray);
   
+        console.log(this.studentsArray[studentIndex]);
         const foundScoreStudentId = this.assignmentsScoreArray.filter(item => {
          return item.studentId == this.studentsArray[studentIndex]._id 
         });
-        console.log(foundScoreStudentId[1].assignmentId);
-        console.log(this.assignmentsArrayFiltered[assignIndex]._id);
+        console.log(foundScoreStudentId);
   
+        console.log(this.assignmentsArrayFiltered[assignIndex]);
         const foundScore = foundScoreStudentId.find(item => {
         return item.assignmentId == this.assignmentsArrayFiltered[assignIndex]._id;
         })
         console.log(foundScoreStudentId);
         console.log(foundScore);
         console.log(data.value);
+
+        console.log(this.students);
   
         const newScore = {
         assignmentId: foundScore.assignmentId,
@@ -428,6 +460,11 @@ export class TableTooComponent implements OnInit, OnChanges {
   
         this.post.updateAssignmentScore(foundScore._id, newScore);
       }
+
+      this.cols = [];
+      this.students = [];
+
+      this.refresh();
       
     }
 
@@ -435,11 +472,13 @@ export class TableTooComponent implements OnInit, OnChanges {
       console.log("showData invoked");
       console.log(array);
     }
+
+
     
   // REFRESH
 
     async refresh() {
-    console.log(` COURSE_ID: ${this.thisCourse._id}`);
+    console.log(`COURSE_ID: ${this.thisCourse._id}`);
 
     this.cols = [
       { field: 'assignment', header: 'Assignments' },
