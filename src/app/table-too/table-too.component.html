@@ -25,7 +25,6 @@ type="text">
 <hr>
 <label for="studName" *ngIf="showStudentName">NEW NAME </label>
 <input id="studName" *ngIf="showStudentName">
-<button (click)="newName()"></button>
 
 <div class="content-section implementation">
 
@@ -36,15 +35,17 @@ type="text">
             <tr>
                 <th *ngFor="let col of columns; index as i">
                     {{ col.header + " " }}<i (click)="removeStudentName(data, rowData, col.field, students, col)" 
-                    [ngClass]="isVisible" 
-                    *ngIf="i>=2" 
+                    *ngIf="i>=2 && isVisible" 
                     class="fa fa-times-circle"></i>
                 </th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-rowData let-columns="columns">
             <tr>
-                <td pEditableColumn *ngFor="let col of columns">
+                <td pEditableColumn *ngFor="let col of columns; index as i">
+                        <i (click)="removeAssignment(data, rowData, col.field, students, col)" 
+                        *ngIf="i==0 && isVisible" 
+                        class="fa fa-times-circle"></i>
                     <p-cellEditor>
                         <ng-template pTemplate="input">
                             <input pInputText type="text" [(ngModel)]="rowData[col.field]" (keydown.enter)="emit(data, rowData, col.field, students, col)" #data>
@@ -66,7 +67,19 @@ type="text">
     </p-table>
 <hr>
 <hr>
+<!-- <div>
+    <ul style="list-style-type: none">
+        <li ngFor="let student of studentsList"><i class="fa fa-times-circle"></i>{{ student }}</li>
+    </ul>
+</div>
+<hr>
+<div>
+    <ul style="list-style-type: none">
+        <li ngFor="let assignment of assignmentsList"><i class="fa fa-times-circle"></i>{{ assignment }}</li>
+    </ul>
+</div>
 <button (click)="showData(this.students)">SHOW DATA ARRAY</button>
+<hr> -->
 
 <!-- rowData, rowData[col.field -->
 

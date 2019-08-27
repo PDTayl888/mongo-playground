@@ -34,7 +34,8 @@ export class TableTooComponent implements OnInit, OnChanges {
   studentTotals: number[] = [];
   assignmentsTotal: number;
   studentScoreFiltered: any;
-
+  isVisible: boolean = true;
+  removeThisAssignment: number;
 
   // public cols;
 
@@ -330,6 +331,21 @@ export class TableTooComponent implements OnInit, OnChanges {
     this.refresh();
 
   }
+  
+  // REMOVE ASSIGNMENT
+
+  async removeAssignment(data, arrayPosition, field, students, col) {
+    console.log('removeAssignment invoked');
+
+    console.log(this.students);
+    console.log(arrayPosition);
+    this.students.forEach((item, i) => {
+      if(item == arrayPosition) {
+        this.removeThisAssignment = i;
+      }
+    });
+    console.log(this.removeThisAssignment);
+  }
 
 
 
@@ -467,6 +483,7 @@ export class TableTooComponent implements OnInit, OnChanges {
       this.refresh();
       
     }
+    
 
     showData(array) {
       console.log("showData invoked");
