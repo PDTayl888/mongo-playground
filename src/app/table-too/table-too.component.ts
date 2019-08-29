@@ -3,7 +3,7 @@ import { Component, OnInit, ViewChild, AfterViewInit, OnChanges, Input, ElementR
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms'
 import { PostsService } from '../services/posts.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { map, catchError, debounceTime } from 'rxjs/operators';
+import { map, catchError, debounceTime, withLatestFrom } from 'rxjs/operators';
 import { from, Observable } from 'rxjs';
 
 @Component({
@@ -74,6 +74,8 @@ export class TableTooComponent implements OnInit, OnChanges {
 
 
   
+
+  
         
     await this.post.getStudentsPromise()
       .then(item => {
@@ -120,6 +122,8 @@ export class TableTooComponent implements OnInit, OnChanges {
       return item.courseId == this.thisCourse._id;
     });
     // console.log(this.assignmentsScoreArray);
+
+
 
   
 
@@ -358,10 +362,72 @@ export class TableTooComponent implements OnInit, OnChanges {
 
     const assignmentToRemove = this.assignmentsArray[this.removeAssignmentIndex]._id;
     console.log(assignmentToRemove);
-    this.post.removeAssignment(assignmentToRemove);
+
+    await this.post.removeAssignment(assignmentToRemove);
+
+
+
+
+
+  //   await this.post.getAssignmentsPromise()
+  //   .then(res => {
+  //     // console.log(res);
+  //     this.assignmentsArray = res;
+  //   });
+  // console.log(this.assignmentsArray);
+
+  // this.assignmentsArray = this.assignmentsArray.filter(assignment => 
+  // assignment.courseId == this.thisCourse._id);
+
+  console.log(this.assignmentsArray[this.removeAssignmentIndex]);
+
+  // this.assignmentsArray = this.assignmentsArray.filter()
+
+
+
+    await this.post.getAssignmentScorePromise()
+    .then(res => {
+      // console.log("getAssignmentScorePromise invoked in table-too");
+      // console.log(res);
+      this.assignmentsScoreArray = res;
+    })
+    .catch(err => {
+      console.log(err);
+    });
+  // console.log(this.assignmentsScoreArray);
+  console.log(this.thisCourse);
+
+  this.assignmentsScoreArray = this.assignmentsScoreArray.filter(item => {
+    // console.log(item.courseId);
+    // console.log(this.thisCourse._id);
+    return item.courseId == this.thisCourse._id;
+  });
+
+  console.log(this.assignmentsScoreArray);
+
+  console.log(this.assignmentsScoreArray.length);
+  console.log(this.assignmentsArray[this.removeAssignmentIndex]._id);
+  console.log(this.assignmentsScoreArray[this.removeAssignmentIndex].assignmentId);
+
+  for(let i=0; i<this.assignmentsScoreArray.length; i++) {
+    console.log(this.assignmentsScoreArray[i].assignmentId);
+    if(this.assignmentsArray[this.removeAssignmentIndex]._id === this.assignmentsScoreArray[i].assignmentId) {
+      console.log(this.assignmentsScoreArray[i]._id);
+      console.log("poooooooppp!!!!!!!!!");
+      // console.log(this.assignmentsScoreArray[i]._id);
+      await this.post.removeStudentScore(this.assignmentsScoreArray[i]._id)
+    }
+  }
+
+  console.log(assignmentToRemove);
+
+
+
 
     this.cols = [];
     this.students = [];
+
+    console.log('REFRESH CALLED MAYBE AFTER REMOVING ASSIGNMENT AND SCORES');
 
     this.refresh();
   }
