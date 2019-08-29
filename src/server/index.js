@@ -239,7 +239,16 @@ app.delete('/api/assignmentscore/:id', async(req, res) => {
     const assignmentscore = await AssignmentScore.findByIdAndRemove(req.params.id);
 
     res.send(assignmentscore);
-})
+});
+
+app.delete('/api/assignments/:id', async(req, res) => {
+    console.log('remove assignment backend invoked');
+    console.log(req.params.id);
+
+    const assignment = await Assignment.findByIdAndRemove(req.params.id);
+
+    res.send(assignment);
+});
 
 app.post('/api/students', async (req, res) => {
     

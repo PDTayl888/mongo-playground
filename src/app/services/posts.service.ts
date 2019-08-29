@@ -184,6 +184,15 @@ getAssignmentScore() {
     })
   }
 
+  removeAssignment(id: any) {
+    console.log('removeAssignment invoked in service');
+    console.log(id);
+    this.http.delete("http://localhost:3000/api/assignments/" + id)
+      .subscribe(res => {
+        console.log(res);
+    })
+  }
+
   updateAssignment(id: any, newAssignmentObject: any) {
     console.log('updateAssignment service invoked');
     this.http.put("http://localhost:3000/api/assignments/" + id, newAssignmentObject)

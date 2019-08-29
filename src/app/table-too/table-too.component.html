@@ -29,13 +29,14 @@ type="text">
 <div class="content-section implementation">
 
 
+    <button (click)="editMode()">REMOVE MODE</button>
     <h1 class="first">{{ thisCourse.title | uppercase }}</h1>
     <p-table [columns]="cols" [value]="students">
         <ng-template pTemplate="header" let-columns>
             <tr>
                 <th *ngFor="let col of columns; index as i">
                     {{ col.header + " " }}<i (click)="removeStudentName(data, rowData, col.field, students, col)" 
-                    *ngIf="i>=2 && isVisible" 
+                    *ngIf="i>=2 && showEdit" 
                     class="fa fa-times-circle"></i>
                 </th>
             </tr>
@@ -44,7 +45,7 @@ type="text">
             <tr>
                 <td pEditableColumn *ngFor="let col of columns; index as i">
                         <i (click)="removeAssignment(data, rowData, col.field, students, col)" 
-                        *ngIf="i==0 && isVisible" 
+                        *ngIf="i==0 && showEdit" 
                         class="fa fa-times-circle"></i>
                     <p-cellEditor>
                         <ng-template pTemplate="input">
