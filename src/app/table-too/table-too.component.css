@@ -5,3 +5,22 @@
 .notVisible {
     display: none;
 }
+
+.content-section tr {
+    background-color: rgb(92, 247, 92);
+    color: rgb(57, 125, 180);
+    border: 2px solid purple;
+}
+
+.content-section th {
+    background-color: orange;
+}
+
+tr {
+    background-color: salmon;
+}
+
+#footer {
+    background-color: yellow;
+    color: red;
+}

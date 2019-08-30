@@ -59,7 +59,7 @@ type="text">
             </tr>
         </ng-template>
         <ng-template pTemplate="footer" let-totalsData>
-            <tr>
+            <tr id="footer">
                 <td>{{ "TOTALS" }}</td>
                 <td>{{ assignmentsTotal }}</td>
                 <td *ngFor="let studentTotal of studentTotals">{{ studentTotal }}</td>
