@@ -8,8 +8,8 @@
 
 .content-section tr {
     background-color: rgb(92, 247, 92);
-    color: rgb(57, 125, 180);
-    border: 2px solid purple;
+    color: rgb(121, 14, 94);
+    border: 2px solid rgb(231, 53, 172);
 }
 
 .content-section th {
@@ -22,5 +22,10 @@ tr {
 
 #footer {
     background-color: yellow;
+    color: red;
+}
+
+#footerStudentTotals {
+    background-color: lightsteelblue;
     color: red;
 }

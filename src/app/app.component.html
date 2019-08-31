@@ -1,5 +1,24 @@
 <!-- <student-input></student-input> -->
 <!-- <hr> -->
+<h1>base</h1>
+<div *ngIf="auth.user$ | async as user; else login">
+    <pre>
+    {{ user | json }}
+    </pre>
+    <hr>
+    <button class="button" (click)="auth.signOut()">Sign Out</button>
+
+</div>
+
+<ng-template #login>
+    <button class="button" (click)="auth.googleSignin()">Login with Google</button>
+</ng-template>
+
+<div id="seperator"></div>
+
+<router-outlet></router-outlet>
+
+
 
 
 <div [formGroup]="courseForm">
@@ -13,14 +32,4 @@ formControlName="courseTitle">
 <hr>
 <app-table-too [thisCourse]="course"  *ngFor="let course of coursesArray"></app-table-too>
 
-<!-- <ag-grid-angular 
-    #agGrid
-    style = "width: 500px; height: 500px;" 
-    class = "ag-theme-balham"
-    [rowData] = "rowData" 
-    [columnDefs] = "columnDefs"
-    rowSelection = "multiple">
-</ag-grid-angular> -->
 <hr>
-<!-- <button (click)="getSelectedRows()">Get Selected Rows</button> -->
-<!-- <table-container></table-container> -->

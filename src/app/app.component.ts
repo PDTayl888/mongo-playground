@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef, Renderer2, AfterViewInit } fr
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { PostsService } from './services/posts.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { AgGridAngular } from 'ag-grid-angular';
+import { AuthService } from './services/auth.service';
 
 
 const httpOptions = {
@@ -21,11 +21,9 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   recentCourse: any;
 
-
-
   coursesArray: any;
 
-  constructor(private fb: FormBuilder, private post: PostsService, private http: HttpClient, renderer2: Renderer2) {}
+  constructor(private fb: FormBuilder, private post: PostsService, private http: HttpClient, renderer2: Renderer2, public auth: AuthService,) {}
 
   ngOnInit() {
 
@@ -50,11 +48,8 @@ export class AppComponent implements OnInit, AfterViewInit {
   courseForm: FormGroup;
 
 
-  title = 'cors-client';
+  title = 'grades.';
 
-  // courseTitles: string[] = [
-  //   'Communications 42', 'Communications w/ Aliens 51', 'Physics 101'
-  // ]
 
   currentCourse: any;
 
@@ -81,22 +76,6 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.coursesArray.push(this.recentCourse);
     console.log(this.coursesArray);
   }
-
-  @ViewChild('agGrid', { static: false }) agGrid: AgGridAngular;
-
-
-  columnDefs = [
-    {headerName: 'Assignment', field: 'assignment', sortable: true, filter: true, checkboxSelection: true },
-    {headerName: 'Total Possible', field: 'total possible', sortable: true, filter: true },
-    {headerName: 'Student Name', field: 'student name', sortable: true, filter: true }
-];
-
-  rowData = [
-      { Assignment: 'Exam', totalPossible: 42 },
-      { Assignment: 'Final', totalPossible: 420},
-      { Assignment: 'Persuasive Essay', totalPossible: 777 }
-  ];
-
 
 
 }

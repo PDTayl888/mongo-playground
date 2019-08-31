@@ -126,6 +126,16 @@ app.get('/api/students', async (req, res) => {
     res.send(student);
 });
 
+app.get('/api/users', async (req, res) => {
+    const user = await User.find()
+        .exec()
+        .then((param) => {
+            console.log(param);
+            return param;
+        })
+    res.send(user);
+});
+
 app.get('/api/assignments', async (req, res) => {
     const student = await Assignment.find()
         .exec()
@@ -159,6 +169,24 @@ app.post('/api/courses', async (req, res) => {
         console.log(courseResult);
 
         res.send(course);
+    } catch(error) {
+        res.status(500).send(error);
+    }
+});
+
+app.post('/api/users', async (req, res) => {
+    
+    try {
+        console.log(req.body);
+
+        const newUser = req.body;
+
+        const user = new User(newUser);
+
+        const userResult = user.save();
+        console.log(courseResult);
+
+        res.send(user);
     } catch(error) {
         res.status(500).send(error);
     }

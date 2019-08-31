@@ -60,9 +60,9 @@ type="text">
         </ng-template>
         <ng-template pTemplate="footer" let-totalsData>
             <tr id="footer">
-                <td>{{ "TOTALS" }}</td>
-                <td>{{ assignmentsTotal }}</td>
-                <td *ngFor="let studentTotal of studentTotals">{{ studentTotal }}</td>
+                <td id="footer">{{ "TOTALS" }}</td>
+                <td id="footer">{{ assignmentsTotal }}</td>
+                <td id="footerStudentTotals" *ngFor="let studentTotal of studentTotals">{{ studentTotal }}</td>
             </tr>    
         </ng-template>        
     </p-table>
