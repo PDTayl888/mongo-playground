@@ -17,6 +17,8 @@ import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { SecretComponent } from './secret/secret.component';
+import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { SecretComponent } from './secret/secret.component';
     StudentInputComponent,
     GradesFormComponent,
     TableTooComponent,
-    SecretComponent
+    SecretComponent,
+    HomeComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

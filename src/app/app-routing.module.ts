@@ -1,11 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
-import { SecretComponent } from './secret/secret.component';
 import { AuthGuard } from './services/auth.guard';
+import { TableTooComponent } from './table-too/table-too.component';
+import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
-  { path: 'secret', component: SecretComponent, canActivate: [AuthGuard] }
+  { path: '', component: LoginComponent, canActivate: [AuthGuard] },
+  { path: 'home', component: HomeComponent, canActivate: [AuthGuard] } 
 ];
 
 @NgModule({

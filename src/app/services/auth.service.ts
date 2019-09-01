@@ -56,4 +56,8 @@ export class AuthService {
 
   }
 
+  getUsers() {
+    return this.afs.collection('users').snapshotChanges();
+  }
+
 }

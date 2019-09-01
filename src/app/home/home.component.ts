@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild, ElementRef, Renderer2, AfterViewInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { PostsService } from './services/posts.service';
+import { PostsService } from '../services/posts.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { AuthService } from './services/auth.service';
-import { User } from './services/user.model';
+import { AuthService } from '../services/auth.service';
+import { User } from '../services/user.model';
 import { compileNgModuleFromRender2 } from '@angular/compiler/src/render3/r3_module_compiler';
 
 
@@ -15,11 +15,11 @@ const httpOptions = {
 };
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css']
 })
-export class AppComponent implements OnInit, AfterViewInit {
+export class HomeComponent implements OnInit, AfterViewInit {
 
   usersArray: any = [];
 
@@ -27,7 +27,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   coursesArray: any;
 
-  constructor(private fb: FormBuilder, private post: PostsService, private http: HttpClient, renderer2: Renderer2, private auth: AuthService,) {}
+  constructor(private fb: FormBuilder, private post: PostsService, private http: HttpClient, renderer2: Renderer2) {}
 
   ngOnInit() {
 
@@ -81,26 +81,5 @@ export class AppComponent implements OnInit, AfterViewInit {
     console.log(this.coursesArray);
   }
 
-  users() {
-    this.auth.getUsers()
-      .subscribe((res) => {
-        this.usersArray = res.map((item) => {
-          return {
-            data: item.payload.doc.data()
-          }
-        })
-      });
-    console.log(this.usersArray);
-  }
-
-  // users() {
-  //   this.auth.getUsers()
-  //     .subscribe(res => {
-  //       this.usersArray = res
-  //     })
-  //     console.log(this.usersArray);
-  // }
-
-
-
 }
+
