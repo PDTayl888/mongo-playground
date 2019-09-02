@@ -25,6 +25,7 @@ export class AuthService {
         if(user) {
           return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
         } else {
+          console.log("OFNULL@@@@@@@@@@");
           return of(null);
         }
       })

@@ -7,7 +7,7 @@ import { map, catchError, debounceTime, withLatestFrom } from 'rxjs/operators';
 import { from, Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-table-too',
+  selector: 'table-too',
   templateUrl: './table-too.component.html',
   styleUrls: ['./table-too.component.css']
 })

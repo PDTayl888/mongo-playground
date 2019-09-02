@@ -1,0 +1,18 @@
+.signOutButton {
+    background-color: lightblue;
+    border: 1px solid lightcoral;
+    box-shadow: 5px 7px pink;
+}
+
+.signInButton {
+    background-color: pink;
+    border: 1px solid lime;
+    box-shadow: -5px -2px crimson;
+}
+
+.userButton {
+    background-color: rgb(146, 54, 69);
+    border: 1px solid rgb(7, 73, 7);
+    box-shadow: -5px -2px rgb(190, 220, 20);
+    color: silver;
+}

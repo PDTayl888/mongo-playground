@@ -4,7 +4,6 @@ import { PostsService } from './services/posts.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from './services/auth.service';
 import { User } from './services/user.model';
-import { compileNgModuleFromRender2 } from '@angular/compiler/src/render3/r3_module_compiler';
 
 
 const httpOptions = {
@@ -27,9 +26,21 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   coursesArray: any;
 
+  showHome: boolean = false;
+
   constructor(private fb: FormBuilder, private post: PostsService, private http: HttpClient, renderer2: Renderer2, private auth: AuthService,) {}
 
   ngOnInit() {
+
+    console.log("AUTH.USER RIGHT HERE!!!!");
+    this.auth.user$
+      .subscribe(res => {
+        if(res) {
+          this.showHome = true;
+        } else {
+          this.showHome = false;
+        }
+      })
 
     this.courseForm = this.fb.group({
       courseTitle: ''

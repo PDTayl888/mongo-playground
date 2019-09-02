@@ -1,12 +1,12 @@
 <div [formGroup]="courseForm">
     Value: {{ courseForm.value | json }}
-<button (click)="addCourseTitle(beluga.value)">ADD COURSE</button>
+<button (click)="addCourseTitle(title.value)">ADD COURSE</button>
 <input
-#beluga
+#title
 formControlName="courseTitle">
 </div>
 <hr>
 <hr>
-<app-table-too [thisCourse]="course"  *ngFor="let course of coursesArray"></app-table-too>
+<table-too [thisCourse]="course"  *ngFor="let course of coursesArray"></table-too>
 
 <hr>

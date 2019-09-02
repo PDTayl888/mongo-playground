@@ -28,7 +28,6 @@ type="text">
 
 <div class="content-section implementation">
 
-
     <button (click)="editMode()">REMOVE MODE</button>
     <h1 class="first">{{ thisCourse.title | uppercase }}</h1>
     <p-table [columns]="cols" [value]="students">
@@ -68,50 +67,5 @@ type="text">
     </p-table>
 <hr>
 <hr>
-<!-- <div>
-    <ul style="list-style-type: none">
-        <li ngFor="let student of studentsList"><i class="fa fa-times-circle"></i>{{ student }}</li>
-    </ul>
-</div>
-<hr>
-<div>
-    <ul style="list-style-type: none">
-        <li ngFor="let assignment of assignmentsList"><i class="fa fa-times-circle"></i>{{ assignment }}</li>
-    </ul>
-</div>
 <button (click)="showData(this.students)">SHOW DATA ARRAY</button>
-<hr> -->
-
-<!-- rowData, rowData[col.field -->
-
-
-    <!-- <td pEditableColumn>
-        <p-cellEditor>
-            <ng-template pTemplate="input">
-                <input pInputText type="text" [(ngModel)]="rowData.total" required>
-            </ng-template>
-            <ng-template pTemplate="output">
-                {{rowData.total}}
-            </ng-template>
-        </p-cellEditor>
-    </td>
-    <td pEditableColumn>
-        <p-cellEditor>
-            <ng-template pTemplate="input">
-                    <input pInputText type="text" [(ngModel)]="rowData.studentName1" required>
-            </ng-template>
-            <ng-template pTemplate="output">
-                {{rowData.studentName1}}
-            </ng-template>
-        </p-cellEditor>
-    </td>
-    <td pEditableColumn>
-        <p-cellEditor>
-            <ng-template pTemplate="input">
-                <input pInputText type="text" [(ngModel)]="rowData.studentName2">
-            </ng-template>
-            <ng-template pTemplate="output">
-                {{rowData.studentName2}}
-            </ng-template>
-        </p-cellEditor>
-    </td> -->
+<hr> 

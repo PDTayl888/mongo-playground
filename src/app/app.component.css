@@ -1,4 +1,55 @@
+body {
+    background-color: rgb(119, 167, 175);
+    box-shadow: 5px 7px rgb(213, 238, 248);
+    border-radius: 3px;
+}
+
 #separator {
     border: 10px solid purple;
     margin-top: 10px;
+    border-radius: 3px;
 }
+
+h1 {
+    background-color: rgb(51, 172, 160);
+    font-size: 60px;
+    color: rgb(163, 235, 248);
+    text-align: center;
+    border-radius: 8px;
+    padding-bottom: 9px;
+    padding-left: 7px;
+}
+
+.header-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.header {
+    display: flex;
+    justify-content: flex-start;
+
+}
+
+.loginOrOutButton {
+    background-color: rgb(119, 167, 175);
+    display: flex;
+    justify-content: flex-end;
+
+}
+
+#blank {
+    padding: 5px;
+}
+
+/* .navi {
+	
+    position: fixed;
+    width: 100%;
+    background: rgba(733,33,124, 0.64);
+    text-align: center; 
+    padding: 10px 0px 10px 0px;
+    z-index: 2;
+   }   */
+
+  

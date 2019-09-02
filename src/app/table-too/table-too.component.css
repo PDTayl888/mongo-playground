@@ -7,25 +7,32 @@
 }
 
 .content-section tr {
-    background-color: rgb(92, 247, 92);
+    background-color: rgb(232, 243, 232);
     color: rgb(121, 14, 94);
-    border: 2px solid rgb(231, 53, 172);
+    border: 1px solid rgb(132, 213, 240);
+    border-radius: 3px;
 }
 
 .content-section th {
-    background-color: orange;
+    background-color: rgb(124, 198, 221);
 }
 
 tr {
     background-color: salmon;
+    border:3px dotted white;
 }
 
 #footer {
-    background-color: yellow;
+    background-color: rgb(143, 240, 98);
     color: red;
 }
 
 #footerStudentTotals {
     background-color: lightsteelblue;
     color: red;
+}
+
+.first {
+    color: rgb(41, 94, 155);
+    text-align: center;
 }
