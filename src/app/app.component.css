@@ -5,9 +5,10 @@ body {
 }
 
 #separator {
-    border: 10px solid purple;
+    border: 15px solid purple;
     margin-top: 10px;
-    border-radius: 3px;
+    border-radius: 4px;
+    /* box-shadow: 5px 7px rgb(213, 238, 248); */
 }
 
 h1 {
@@ -39,7 +40,7 @@ h1 {
 }
 
 #blank {
-    padding: 5px;
+    padding: 15px;
 }
 
 /* .navi {

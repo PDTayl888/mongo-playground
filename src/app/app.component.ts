@@ -4,6 +4,7 @@ import { PostsService } from './services/posts.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from './services/auth.service';
 import { User } from './services/user.model';
+import { Router } from '@angular/router';
 
 
 const httpOptions = {
@@ -28,17 +29,26 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   showHome: boolean = false;
 
-  constructor(private fb: FormBuilder, private post: PostsService, private http: HttpClient, renderer2: Renderer2, private auth: AuthService,) {}
+  constructor(private router: Router, private fb: FormBuilder, private post: PostsService, private http: HttpClient, renderer2: Renderer2, private auth: AuthService,) {}
 
   ngOnInit() {
+
+    // this.auth.user$
+    // .subscribe(res => {
+    //   if(res) {
+    //     this.showHome = true;
+    //   } else {
+    //     this.showHome = false;
+    //   }
+    // })
+
 
     console.log("AUTH.USER RIGHT HERE!!!!");
     this.auth.user$
       .subscribe(res => {
         if(res) {
-          this.showHome = true;
-        } else {
-          this.showHome = false;
+          console.log("res route true");
+        this.router.navigate(['/home']);
         }
       })
 

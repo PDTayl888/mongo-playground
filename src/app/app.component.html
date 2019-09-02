@@ -7,13 +7,13 @@
     <h1 class="header">grades.</h1>
 
 
-<div class="loginOrOutButton">
+<div style="border: 2px solid red">
     <div *ngIf="auth.user$ | async as user; else login">
         <pre>
                 {{ user.displayName  | json }}
         </pre>
             
-    <button  (click)="auth.signOut()">Sign Out</button>
+    <button  class="loginOrOutButton" (click)="auth.signOut()">Sign Out</button>
 
     </div>
 </div>
@@ -28,9 +28,9 @@
 <div id="separator"></div>
 <div id="blank"></div>
 
-<home *ngIf="showHome"></home>
+<!-- <home *ngIf="showHome"></home> -->
 
-<!-- <router-outlet></router-outlet> -->
+<router-outlet></router-outlet>
 
 
 <!-- <div class="serparator"></div> -->
