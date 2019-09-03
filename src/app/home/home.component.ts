@@ -26,13 +26,25 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   coursesArray: any;
 
+  newUid: any;
+
   constructor(private fb: FormBuilder, private post: PostsService, private http: HttpClient, renderer2: Renderer2, private auth: AuthService) {}
 
-  ngOnInit() {
+  async ngOnInit() {
 
     this.courseForm = this.fb.group({
       courseTitle: ''
     })
+
+    await this.post.getUsersPromise()
+    .then(res => {
+      console.log("FART");
+      console.log(res);
+      this.usersArray = res;
+    })
+  console.log("THIS.USERSARRAY RIGHT HERE 1 1 ! !");
+  console.log(this.usersArray);
+
 
     // this.courseForm.valueChanges.subscribe(console.log)
 
@@ -63,6 +75,15 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   async addCourseTitle(course) {
     console.log(course);
+
+    this.auth.user$
+      .subscribe(res => {
+        console.log("AUTH USER IN ADD COURSE");
+        console.log(res.uid);
+        this.newUid = res;
+      })
+    console.log("NEWUID");
+    console.log(this.newUid);
     const inputToJson = {
       title: course
     }

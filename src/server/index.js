@@ -5,6 +5,7 @@ const { Course } = require('./models/course');
 const { Assignment } = require('./models/assignment');
 const { Student } = require('./models/student');
 const { AssignmentScore } = require('./models/assignmentScore');
+const { User } = require('./models/user');
 
 const cors = require('cors');
 
@@ -127,6 +128,7 @@ app.get('/api/students', async (req, res) => {
 });
 
 app.get('/api/users', async (req, res) => {
+    console.log("BACKEND GET USERS INVOKED");
     const user = await User.find()
         .exec()
         .then((param) => {

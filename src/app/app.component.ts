@@ -31,7 +31,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   constructor(private router: Router, private fb: FormBuilder, private post: PostsService, private http: HttpClient, renderer2: Renderer2, private auth: AuthService,) {}
 
-  ngOnInit() {
+  async ngOnInit() {
 
     // this.auth.user$
     // .subscribe(res => {
@@ -65,6 +65,22 @@ export class AppComponent implements OnInit, AfterViewInit {
         console.log(this.coursesArray);
       })
 
+
+
+      // this.auth.user$
+      // .subscribe(authRes => {
+      //   if(authRes) {
+      //     this.post.getUsersPromise()
+      //       .then(userRes => {
+      //        this.usersArray = userRes;
+      //       })
+      //   }
+      //   console.log("object");
+      //   console.log(authRes.uid);
+      //   console.log(this.usersArray);
+      // })
+
+
   }
 
   ngAfterViewInit() {
@@ -72,9 +88,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   courseForm: FormGroup;
 
-
   title = 'grades.';
-
 
   currentCourse: any;
 
@@ -84,6 +98,12 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   async addCourseTitle(course) {
+
+    this.auth.user$
+      .subscribe(res => {
+        console.log(res);
+      })
+
     console.log(course);
     const inputToJson = {
       title: course

@@ -77,6 +77,17 @@ getAssignments() {
   return this.http.get("http://localhost:3000/api/assignments", httpOptions);
 }
 
+getUsers() {
+  return this.http.get("http://localhost:3000/api/users", httpOptions);
+}
+
+async getUsersPromise() {
+  console.log('getUsersPromise invoked in postService');
+
+  return await this.http.get("http://localhost:3000/api/users", httpOptions).toPromise();
+}
+
+
 async getAssignmentScorePromise() {
   return await this.http.get("http://localhost:3000/api/assignmentscore", httpOptions).toPromise();
 }
