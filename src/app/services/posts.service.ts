@@ -158,6 +158,17 @@ getAssignmentScore() {
     });
   }
 
+  submitUser(data: any) {
+    this.http
+    .post("http://localhost:3000/api/users",
+    data, httpOptions
+    )
+    .subscribe(res => {
+      console.log("submitUser hast been invokedeth");
+      console.log(res);
+    });
+  }
+
   updateStudent(id: any, newName: any, setCourseId: any) {
     console.log('updateStudent service invoked');
     const fart = {

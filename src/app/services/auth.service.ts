@@ -32,6 +32,21 @@ export class AuthService {
     );
   }
 
+
+  async thisUserPromise() {
+    return this.user$ = this.afAuth.authState.pipe(
+      switchMap(user => {
+        if(user) {
+          return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
+        } else {
+          console.log("OFNULL@@@@@@@@@@");
+          return of(null);
+        }
+      })
+    );
+
+  }
+
   async googleSignin() {
     const provider = new auth.GoogleAuthProvider();
     const credential = await this.afAuth.auth.signInWithPopup(provider);

@@ -1,10 +1,6 @@
-<div [formGroup]="courseForm">
-    Value: {{ courseForm.value | json }}
 <button (click)="addCourseTitle(title.value)">ADD COURSE</button>
-<input
-#title
-formControlName="courseTitle">
-</div>
+<input #title>
+
 <hr>
 <hr>
 <table-too [thisCourse]="course"  *ngFor="let course of coursesArray"></table-too>

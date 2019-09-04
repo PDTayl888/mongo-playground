@@ -185,8 +185,7 @@ app.post('/api/users', async (req, res) => {
 
         const user = new User(newUser);
 
-        const userResult = user.save();
-        console.log(courseResult);
+        user.save();
 
         res.send(user);
     } catch(error) {

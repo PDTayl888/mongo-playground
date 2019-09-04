@@ -4,6 +4,7 @@ import { PostsService } from '../services/posts.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from '../services/auth.service';
 import { User } from '../services/user.model';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 
 const httpOptions = {
@@ -20,7 +21,11 @@ const httpOptions = {
 })
 export class HomeComponent implements OnInit, AfterViewInit {
 
+  currentUser: any = true;
+
   usersArray: any = [];
+
+  usersArrayNew: any = [];
 
   recentCourse: any;
 
@@ -28,25 +33,43 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   newUid: any;
 
-  constructor(private fb: FormBuilder, private post: PostsService, private http: HttpClient, renderer2: Renderer2, private auth: AuthService) {}
+  currentCourse: any;
+
+
+  constructor(private fb: FormBuilder, private post: PostsService, private http: HttpClient, renderer2: Renderer2, private auth: AuthService, private afAuth: AngularFireAuth) { }
 
   async ngOnInit() {
 
-    this.courseForm = this.fb.group({
-      courseTitle: ''
-    })
-
     await this.post.getUsersPromise()
-    .then(res => {
-      console.log("FART");
-      console.log(res);
-      this.usersArray = res;
-    })
-  console.log("THIS.USERSARRAY RIGHT HERE 1 1 ! !");
-  console.log(this.usersArray);
+      .then(res => {
+        this.usersArrayNew = res;
+      })
+      console.log('INIT USERSARRAY');
+      console.log(this.usersArrayNew);
 
+      const authorizedUid = this.afAuth.auth.currentUser.uid;
 
-    // this.courseForm.valueChanges.subscribe(console.log)
+      this.usersArrayNew.forEach(item => {
+        if(item.uid == authorizedUid) {
+          this.currentUser = false;
+        }
+      })
+      console.log(this.currentUser);
+
+    if(this.currentUser) {
+    const authorizedDisplayName = this.afAuth.auth.currentUser.displayName;
+    const authorizedUid = this.afAuth.auth.currentUser.uid;
+    console.log(authorizedUid);
+    console.log(authorizedDisplayName);
+    
+    const inputToJsonUser = {
+      displayName: authorizedDisplayName,
+      uid: authorizedUid
+    }
+    console.log(inputToJsonUser);
+    this.post.submitUser(inputToJsonUser);
+  }
+
 
       this.http.get("http://localhost:3000/api/courses", httpOptions)
       .subscribe(item => {
@@ -57,49 +80,20 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   }
 
+
+
   ngAfterViewInit() {
   }
 
-  courseForm: FormGroup;
 
 
   title = 'grades.';
-
-
-  currentCourse: any;
 
   emitCourse(course) {
     console.log(course);
     this.currentCourse = course;
   }
 
-  async addCourseTitle(course) {
-    console.log(course);
-
-    this.auth.user$
-      .subscribe(res => {
-        console.log("AUTH USER IN ADD COURSE");
-        console.log(res.uid);
-        this.newUid = res;
-      })
-    console.log("NEWUID");
-    console.log(this.newUid);
-    const inputToJson = {
-      title: course
-    }
-    console.log(inputToJson);
-    console.log('submitCourseTitle is gettin invoked all up in here yo');
-    this.post.submitCourse(inputToJson)
-
-    await this.post.getRecentCoursePromise()
-      .then(res => {
-        this.recentCourse = res;
-      })
-
-    console.log(this.recentCourse);
-    this.coursesArray.push(this.recentCourse);
-    console.log(this.coursesArray);
-  }
 
   users() {
     this.auth.getUsers()
@@ -114,5 +108,30 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
 
+  async addCourseTitle(course) {
+    console.log(course);
+
+    const authorizedUid = this.afAuth.auth.currentUser.uid;
+
+    const inputToJsonCourse = {
+      title: course,
+      uid: authorizedUid
+    }
+
+    console.log(inputToJsonCourse);
+    console.log('submitCourseTitle is gettin invoked all up in here yo');
+    this.post.submitCourse(inputToJsonCourse)
+
+    await this.post.getRecentCoursePromise()
+      .then(res => {
+        this.recentCourse = res;
+      })
+
+    console.log(this.recentCourse);
+    this.coursesArray.push(this.recentCourse);
+    console.log(this.coursesArray);
+  }
+
 }
+
 

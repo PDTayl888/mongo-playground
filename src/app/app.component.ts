@@ -5,6 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from './services/auth.service';
 import { User } from './services/user.model';
 import { Router } from '@angular/router';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 
 const httpOptions = {
@@ -20,6 +21,8 @@ const httpOptions = {
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit, AfterViewInit {
+
+  currentUser: any;
 
   usersArray: any = [];
 
@@ -122,25 +125,46 @@ export class AppComponent implements OnInit, AfterViewInit {
     console.log(this.coursesArray);
   }
 
+  // users() {
+  //   this.auth.getUsers()
+  //     .subscribe((res) => {
+  //       this.usersArray = res.map((item) => {
+  //         return {
+  //           data: item.payload.doc.data()
+  //         }
+  //       })
+  //     });
+  //   console.log(this.usersArray);
+  // }
+
   users() {
     this.auth.getUsers()
-      .subscribe((res) => {
-        this.usersArray = res.map((item) => {
-          return {
+      .subscribe(res => {
+        this.usersArray = res.map(item => {
+          return { 
             data: item.payload.doc.data()
           }
         })
-      });
-    console.log(this.usersArray);
-  }
+        console.log(this.usersArray);
+        // this.usersArray = res;
+        this.auth.user$
+          .subscribe(res => {
+            console.log(res);
+            this.usersArray.forEach(item => {
+              console.log('FOREAXHCL');
+              console.log(item);
+              if(item.data.uid == res.uid) {
+                console.log('MATCH!');
+                this.currentUser = res;
+                console.log(this.currentUser);
+              }
+            })
+      
+          })
+      })
+      console.log(this.currentUser);
 
-  // users() {
-  //   this.auth.getUsers()
-  //     .subscribe(res => {
-  //       this.usersArray = res
-  //     })
-  //     console.log(this.usersArray);
-  // }
+  }
 
 
 
