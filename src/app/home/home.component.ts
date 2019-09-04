@@ -71,12 +71,21 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
 
-      this.http.get("http://localhost:3000/api/courses", httpOptions)
-      .subscribe(item => {
-        console.log(item);
-        this.coursesArray = item;
-        console.log(this.coursesArray);
+    await this.post.getCoursesPromise()
+      .then(res => {
+        this.coursesArray = res;
       })
+      console.log('MARKED');
+    console.log(this.coursesArray);
+
+    console.log('AUTHORIZEDUID CHECK');
+    console.log(authorizedUid);
+    this.coursesArray = this.coursesArray.filter(res => 
+      res.uid === authorizedUid
+    )
+
+    console.log('COURSESCURRENTFILTERED');
+    console.log(this.coursesArray);
 
   }
 
