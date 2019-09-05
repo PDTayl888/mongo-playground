@@ -1,29 +1,38 @@
 <body>
-    <hr>
+<!--    <hr>
         <button (click)="users()">USERS</button>
-    <hr>
+    <hr> -->
 
-<div class="header">
-    <h1 class="header">grades.</h1>
+<div class="header-container">
+    <div class="title">
+        <h1>grades.</h1>
+    </div>
+
+    <div class="spacer"></div>
 
 
-<div style="border: 2px solid red">
-    <div *ngIf="auth.user$ | async as user; else login">
-        <pre>
-                {{ user.displayName  | json }}
-        </pre>
+    <div class="login-userDisplay-button" *ngIf="auth.user$ | async as user; else login">
             
-    <button  class="loginOrOutButton" (click)="auth.signOut()">Sign Out</button>
+    <button class="login-button" (click)="auth.signOut()">Sign Out</button>
+
+
+    <pre class="user-info">
+        {{ user.email }}
+    </pre>
 
     </div>
-</div>
-
 
 <ng-template #login>
-    <button class="loginOrOutButton" (click)="auth.googleSignin()">Login with Google</button>
+        <div class="login-userDisplay-button">
+
+    <button class="login-button" (click)="auth.googleSignin()">Login</button>
+</div>
 </ng-template>
 
+
 </div>
+
+
 
 <div id="separator"></div>
 <div id="blank"></div>
