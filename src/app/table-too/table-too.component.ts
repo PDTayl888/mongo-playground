@@ -487,6 +487,8 @@ export class TableTooComponent implements OnInit, OnChanges {
         let foundAssignment: any;
         for(let i=0; i<this.assignmentsArray.length; i++) {
           if (this.assignmentsArray[i].title !== students[i].assignment) {
+            console.log(this.assignmentsArray[i].title);
+            console.log(students[i].assignment)
             foundAssignment = this.assignmentsArray[i];
           }
         }
@@ -504,9 +506,7 @@ export class TableTooComponent implements OnInit, OnChanges {
 
         this.cols = [];
         this.students = [];
-  
-        this.refresh();
-  
+    
 
       }
       // ///////////////////////////////////////////////////////////////

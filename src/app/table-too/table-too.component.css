@@ -36,3 +36,12 @@ tr {
     color: rgb(41, 94, 155);
     text-align: center;
 }
+
+.button {
+    background-color: rgb(33, 113, 128);
+    color: whitesmoke;
+    margin-left: 10px;
+    margin-bottom: 20px;
+    margin-top: 18px;
+    width: 40%;
+}

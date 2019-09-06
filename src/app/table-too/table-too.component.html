@@ -2,21 +2,33 @@
 <input #field type="text">
 <input #header type="text">
 <button (click)="poop()">poop</button> -->
-
-<button (click)="newStudent(studentName)">ADD STUDENT</button>
-<input 
+<div>
+    <button 
+    class="button"
+    (click)="newStudent(studentName)">ADD {{ thisCourse.title | uppercase }} STUDENT</button>   <button 
+    class="button"
+    (click)="newAssignment(assignmentTitle, total)">ADD {{ thisCourse.title | uppercase }} ASSIGNMENT</button>
+</div>
+<div>
+    <input 
+(keydown.enter)="newStudent(studentName)"
 #studentName
-type="text">
+type="text"
+placeholder="name">
+<hr>
+<input 
+(keydown.enter)="newAssignment(assignmentTitle, total)"
+#assignmentTitle
+type="text"
+placeholder="assignment title">
+<input
+(keydown.enter)="newAssignment(assignmentTitle, total)"
+#total
+type="text"
+placeholder="total possible">
+</div>
 <!-- <button (click)=sumTotalPossible()>parseInt</button> -->
 
-<hr>
-<button (click)="newAssignment(assignmentTitle, total)">ADD ASSIGNMENT</button>
-<input 
-#assignmentTitle
-type="text">
-<input
-#total
-type="text">
 <hr>
 <!-- <button (click)="logCols()">LOG COLS</button>
 <button (click)="logStudents()">LOG STUDENTS</button>
@@ -64,6 +76,3 @@ type="text">
         </ng-template>        
     </p-table>
 <hr>
-<hr>
-<button (click)="showData(this.students)">SHOW DATA ARRAY</button>
-<hr> 
