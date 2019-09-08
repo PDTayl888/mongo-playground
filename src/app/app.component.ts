@@ -5,7 +5,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from './services/auth.service';
 import { User } from './services/user.model';
 import { Router } from '@angular/router';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 
 const httpOptions = {
@@ -31,6 +30,12 @@ export class AppComponent implements OnInit, AfterViewInit {
   coursesArray: any;
 
   showHome: boolean = false;
+
+  courseForm: FormGroup;
+
+  title = 'grades.';
+
+  currentCourse: any;
 
   constructor(private router: Router, private fb: FormBuilder, private post: PostsService, private http: HttpClient, renderer2: Renderer2, private auth: AuthService,) {}
 
@@ -86,44 +91,46 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   }
 
+
   ngAfterViewInit() {
   }
 
-  courseForm: FormGroup;
 
-  title = 'grades.';
 
-  currentCourse: any;
 
-  emitCourse(course) {
-    console.log(course);
-    this.currentCourse = course;
-  }
 
-  async addCourseTitle(course) {
 
-    this.auth.user$
-      .subscribe(res => {
-        console.log(res);
-      })
 
-    console.log(course);
-    const inputToJson = {
-      title: course
-    }
-    console.log(inputToJson);
-    console.log('submitCourseTitle is gettin invoked all up in here yo');
-    this.post.submitCourse(inputToJson)
 
-    await this.post.getRecentCoursePromise()
-      .then(res => {
-        this.recentCourse = res;
-      })
+  // emitCourse(course) {
+  //   console.log(course);
+  //   this.currentCourse = course;
+  // }
 
-    console.log(this.recentCourse);
-    this.coursesArray.push(this.recentCourse);
-    console.log(this.coursesArray);
-  }
+  // async addCourseTitle(course) {
+
+  //   this.auth.user$
+  //     .subscribe(res => {
+  //       console.log(res);
+  //     })
+
+  //   console.log(course);
+  //   const inputToJson = {
+  //     title: course
+  //   }
+  //   console.log(inputToJson);
+  //   console.log('submitCourseTitle is gettin invoked all up in here yo');
+  //   this.post.submitCourse(inputToJson)
+
+  //   await this.post.getRecentCoursePromise()
+  //     .then(res => {
+  //       this.recentCourse = res;
+  //     })
+
+  //   console.log(this.recentCourse);
+  //   this.coursesArray.push(this.recentCourse);
+  //   console.log(this.coursesArray);
+  // }
 
   // users() {
   //   this.auth.getUsers()
@@ -163,7 +170,6 @@ export class AppComponent implements OnInit, AfterViewInit {
           })
       })
       console.log(this.currentUser);
-
   }
 
 

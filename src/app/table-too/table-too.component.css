@@ -43,5 +43,73 @@ tr {
     margin-left: 10px;
     margin-bottom: 20px;
     margin-top: 18px;
-    width: 40%;
+    width: 30%;
 }
+
+#courseTopRule {
+    color: lime;
+    border-radius: 7px;
+    border: 2px solid rgb(145, 235, 145);
+    border-top: 8px solid rgb(145, 235, 145);
+}
+
+
+
+#add-assignment {
+    display: flex;
+}
+
+#assignment-button-container {
+    flex: 1;
+}
+
+#assignment-input-container {
+    flex: 1;
+}
+
+#assignment-button {
+    margin: 20px;
+    width: 70%
+}
+
+#assignment-title {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#assignment-total {
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+
+
+
+
+
+
+#add-student {
+    margin: 10px;
+    display: flex;
+}
+
+#student-input-container {
+    flex: 1;
+}
+
+#student-input {
+    margin-top: 30px;
+    margin-bottom: 10px; 
+} 
+
+#student-button-container {
+    flex: 1
+}
+
+#student-button {
+    margin: 20px;
+    background-color: rgb(33, 113, 128);
+    color: whitesmoke;
+    width: 70%;
+}
+
