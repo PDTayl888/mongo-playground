@@ -47,10 +47,13 @@ tr {
 }
 
 #courseTopRule {
+    margin-top: 20px;
+    margin-bottom: 29px;
     color: lime;
     border-radius: 7px;
     border: 2px solid rgb(145, 235, 145);
     border-top: 8px solid rgb(145, 235, 145);
+    border-bottom: 8px solid rgb(145, 235, 145);
 }
 
 
@@ -75,6 +78,7 @@ tr {
 #assignment-title {
     margin-top: 10px;
     margin-bottom: 10px;
+    margin-right: 4px;
 }
 
 #assignment-total {

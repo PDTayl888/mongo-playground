@@ -1,5 +1,5 @@
 body {
-    background-color: rgb(119, 167, 175);
+    background-color: rgb(130, 177, 185);
     /* box-shadow: 5px 7px rgb(213, 238, 248); */
     /* border-radius: 3px; */
     margin: 0px;
@@ -85,7 +85,7 @@ h1 {
     margin-bottom: 20px;
     margin-top: 18px;
     width: 40%;
-    background-color: rgb(33, 113, 128);
+    background-color: rgb(76, 170, 187);
     color: rgb(247, 239, 239);
 }
 }

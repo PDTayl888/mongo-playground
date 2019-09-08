@@ -7,7 +7,10 @@ const { Student } = require('./models/student');
 const { AssignmentScore } = require('./models/assignmentScore');
 const { User } = require('./models/user');
 
+require('./prod')(app);
+
 const cors = require('cors');
+
 
 app.options('*', cors());
 app.use(cors());
