@@ -37,7 +37,7 @@ export class TableTooComponent implements OnInit, OnChanges {
   isVisible: boolean = true;
   removeAssignmentIndex: number;
   showEdit: boolean = false;
-  correctStudent: any;
+  removeStudentId: any;
 
   // public cols;
 
@@ -317,7 +317,7 @@ export class TableTooComponent implements OnInit, OnChanges {
       console.log(item.name);
       console.log(col.header);
       if(item.name == col.header) {
-        this.correctStudent = item._id;
+        this.removeStudentId = item._id;
       }
     })
     console.log(this.correctStudent);
@@ -325,7 +325,7 @@ export class TableTooComponent implements OnInit, OnChanges {
 
     console.log(studentsArr[studentIndex]._id);
 
-    this.post.removeStudent(this.correctStudent);
+    this.post.removeStudent(this.removeStudentId);
 
     console.log(studentsArr[studentIndex]);
     console.log(this.assignmentsScoreArray);
