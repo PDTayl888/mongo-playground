@@ -37,6 +37,7 @@ export class TableTooComponent implements OnInit, OnChanges {
   isVisible: boolean = true;
   removeAssignmentIndex: number;
   showEdit: boolean = false;
+  correctStudent: any;
 
   // public cols;
 
@@ -182,10 +183,6 @@ export class TableTooComponent implements OnInit, OnChanges {
 
     console.log(this.assignmentsScoreArray);
 
-
-
-
-
   }
 
 // ********************************************************************
@@ -294,11 +291,12 @@ export class TableTooComponent implements OnInit, OnChanges {
 // REMOVE STUDENT
 
   async removeStudentName(data, arrayPosition, field, students, col) {
+    console.log(this.thisCourse);
     this.showStudentName = !this.showStudentName;
     console.log("editStudentName!");
     console.log(this.cols);
     console.log(col);
-    console.log(this.cols[col]);
+    // console.log(this.cols[col]);
     const studentIndex = this.cols.indexOf(col) - 2;
     console.log(studentIndex);
 
@@ -310,9 +308,24 @@ export class TableTooComponent implements OnInit, OnChanges {
         console.log(studentsArr);
         console.log(studentsArr[studentIndex]);
 
+    this.studentsArray.filter(item => {
+      return item.courseId == this.thisCourse._id;
+    })
+    console.log(col.header);
+    console.log(this.studentsArray);
+    this.studentsArray.forEach(item => {
+      console.log(item.name);
+      console.log(col.header);
+      if(item.name == col.header) {
+        this.correctStudent = item._id;
+      }
+    })
+    console.log(this.correctStudent);
+    console.log(this.studentsArray);
+
     console.log(studentsArr[studentIndex]._id);
 
-    this.post.removeStudent(studentsArr[studentIndex]._id);
+    this.post.removeStudent(this.correctStudent);
 
     console.log(studentsArr[studentIndex]);
     console.log(this.assignmentsScoreArray);
@@ -723,6 +736,11 @@ console.log(this.studentTotals);
 
   //   console.log(this.assignmentsTotal);
   // }
+
+  removeCourse(uid) {
+    console.log(uid);
+    this.post.removeCourse(uid);
+  }
     
 }
 

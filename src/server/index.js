@@ -7,7 +7,7 @@ const { Student } = require('./models/student');
 const { AssignmentScore } = require('./models/assignmentScore');
 const { User } = require('./models/user');
 
-require('./prod')(app);
+require('./prod')(app)
 
 const cors = require('cors');
 
@@ -262,6 +262,22 @@ app.delete('/api/students/:id', async(req, res) => {
     const student = await Student.findByIdAndRemove(req.params.id);
 
     res.send(student);
+});
+
+app.delete('/api/courses/:id', async(req, res) => {
+    app.delete('/api/students/:id', async(req, res) => {
+    console.log('remove student from DB invoked');
+    console.log(req.params.id);
+    const student = await Student.findByIdAndRemove(req.params.id);
+
+    res.send(student);
+});
+
+    console.log('remove course from DB invoked');
+    console.log(req.params.id);
+    const course = await Course.findByIdAndRemove(req.params.id);
+
+    res.send(course);
 });
 
 app.delete('/api/assignmentscore/:id', async(req, res) => {

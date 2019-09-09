@@ -215,13 +215,21 @@ getAssignmentScore() {
     })
   }
 
-
   updateAssignment(id: any, newAssignmentObject: any) {
     console.log('updateAssignment service invoked');
     this.http.put("http://localhost:3000/api/assignments/" + id, newAssignmentObject)
     .subscribe(res => {
       console.log(res);
-    });
+    })
+  }
+
+  removeCourse(id: any) {
+    console.log(id);
+    console.log('removeCourse service invoked');
+    this.http.delete("http://localhost:3000/api/courses/" + id)
+      .subscribe(res => {
+        console.log(res);
+      })
   }
 
 }

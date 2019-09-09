@@ -13,6 +13,11 @@
 
 <div class="content-section implementation">
 
+    
+    <button
+    (click)="removeCourse(thisCourse._id)"
+    class="button">REMOVE {{ thisCourse.title | uppercase }}</button>
+
     <button 
     class="button"
     (click)="editMode()">REMOVE MODE</button>
