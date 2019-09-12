@@ -38,6 +38,7 @@ export class TableTooComponent implements OnInit, OnChanges {
   removeAssignmentIndex: number;
   showEdit: boolean = false;
   removeStudentId: any;
+  correctStudent: any;
 
   // public cols;
 
@@ -72,28 +73,23 @@ export class TableTooComponent implements OnInit, OnChanges {
       { field: 'assignment', header: 'Assignments' },
       { field: 'total', header: 'Total' },
     ];
-
-
-  
-
-  
         
     await this.post.getStudentsPromise()
       .then(item => {
         // console.log(item);
         this.studentsArray = item;
       });
-    // console.log(this.studentsArray);
+    console.log(this.studentsArray);
 
     this.studentsArray = this.studentsArray.filter(student => 
       student.courseId == this.thisCourse._id);
-      // console.log(this.studentsArray);
-        
+      console.log(this.studentsArray);
+                                                 
       this.studentsArray.forEach((student, i) => {
         const studentNumber = i + 1;
         console.log(studentNumber);
         const newHeaderField = { field: `studentName${studentNumber}`, header: `${student.name}`};
-        this.cols.push(newHeaderField);
+        this.cols.push(newHeaderField);                              
         // console.log(this.cols);
       })
 
@@ -127,7 +123,6 @@ export class TableTooComponent implements OnInit, OnChanges {
 
 
   
-
     this.assignmentsArray.forEach(assign => {
       const newData = { assignment: `${assign.title}`, total: `${assign.total}`, }
       console.log(newData);
@@ -165,7 +160,6 @@ export class TableTooComponent implements OnInit, OnChanges {
       this.studentTotals.push(studentTotalScore);
 
       console.log(studentTotalScore);
-
     })
 
     this.assignmentsTotal = 0;
@@ -183,7 +177,7 @@ export class TableTooComponent implements OnInit, OnChanges {
 
     console.log(this.assignmentsScoreArray);
 
-  }
+   }
 
 // ********************************************************************
 // *********************************************************************
@@ -301,54 +295,69 @@ export class TableTooComponent implements OnInit, OnChanges {
     console.log(studentIndex);
 
     let studentsArr: any;
-    await this.post.getStudentsPromise()
+
+    // console.log(studentsArr[studentIndex]);
+    await this.post.getAssignmentScorePromise()
       .then(item => {
         console.log(item);
-        studentsArr = item })
-        console.log(studentsArr);
-        console.log(studentsArr[studentIndex]);
-
-    this.studentsArray.filter(item => {
-      return item.courseId == this.thisCourse._id;
-    })
-    console.log(col.header);
-    console.log(this.studentsArray);
-    this.studentsArray.forEach(item => {
-      console.log(item.name);
-      console.log(col.header);
-      if(item.name == col.header) {
-        this.removeStudentId = item._id;
-      }
-    })
-    console.log(this.correctStudent);
-    console.log(this.studentsArray);
-
-    console.log(studentsArr[studentIndex]._id);
-
-    this.post.removeStudent(this.removeStudentId);
-
-    console.log(studentsArr[studentIndex]);
+        this.assignmentsScoreArray = item;
+      })
     console.log(this.assignmentsScoreArray);
 
     this.assignmentsScoreArray = this.assignmentsScoreArray.filter(item => {
-      // console.log(item.courseId);
-      // console.log(this.thisCourse._id);
-      return item.studentId == studentsArr[studentIndex]._id;
+      console.log(item.studentId);
+      // console.log(studentsArr[studentIndex]._id);
+      return item.studentId == this.studentsArray[studentIndex]._id;
     });
 
     console.log(this.assignmentsScoreArray);
 
-    this.assignmentsScoreArray = this.assignmentsScoreArray.forEach(item => {
-      return this.post.removeStudentScore(item._id)
-    });
+    for(let i=0; i<this.assignmentsScoreArray.length; i++) {
+      console.log(i);
+      console.log(this.assignmentsScoreArray[i]._id);
+      this.post.removeStudentScore(this.assignmentsScoreArray[i]._id);
+    }
+
+
+    await this.post.getStudentsPromise()
+    .then(item => {
+      console.log(item);
+      this.studentsArray = item })
+      console.log(this.studentsArray[studentIndex]);
+    
+      console.log(this.studentsArray);
+
+  this.studentsArray.filter(item => {
+    return item.courseId == this.thisCourse._id;
+  })
+  console.log(col.header);
+  console.log(this.studentsArray);
+  this.studentsArray.forEach(item => {
+    console.log(item.name);
+    console.log(col.header);
+    if(item.name == col.header) {
+      this.removeStudentId = item._id;
+    }
+  })
+  console.log(this.removeStudentId);
+  console.log(this.correctStudent);
+  console.log(this.studentsArray);
+
+  // console.log(studentsArr[studentIndex]._id);
+
+  this.post.removeStudent(this.removeStudentId);
+
+    // this.assignmentsScoreArray = this.assignmentsScoreArray.forEach(item => {
+    //   console.log(item);
+    //   return this.post.removeStudentScore(item._id);
+    // });
 
     console.log(this.assignmentsScoreArray);
 
-    this.cols = [];
+    this.cols = []; 
     this.students = [];
 
     this.refresh();
-
   }
 
 
@@ -453,11 +462,6 @@ export class TableTooComponent implements OnInit, OnChanges {
   editMode() {
     this.showEdit = !this.showEdit;
   }
-
-
-
-
-    newName() {}
  
     logCols() {
       console.log(event);
@@ -470,7 +474,8 @@ export class TableTooComponent implements OnInit, OnChanges {
 
 // EMIT
 
-    emit(data, arrayPosition, field, students, col) {
+    async emit(data, arrayPosition, field, students, col) {
+      console.log("EMIT EMIT EMIT EMIT EMIT");
       console.log(this.cols);
       console.log(col);
       console.log(this.cols.indexOf(col));
@@ -485,9 +490,9 @@ export class TableTooComponent implements OnInit, OnChanges {
       console.log(students.indexOf(arrayPosition));
       const assignIndex = students.indexOf(arrayPosition);
       console.log(students[students.indexOf(arrayPosition)][field]);
-      console.log(this.studentsArray);
+      console.log(this.studentsArray); 
       console.log(this.studentsArray[studentIndex]);
-
+      
       console.log(columnIndex);
 
       // //////////////////////////////////////////////////
@@ -558,6 +563,22 @@ export class TableTooComponent implements OnInit, OnChanges {
       }
       // ////////////////////////////////////////////////////////////////
       if (columnIndex >= 2) {
+        console.log(assignIndex);
+
+
+
+
+        await this.post.getAssignmentsPromise()
+        .then(res => {
+          // console.log(res);
+          this.assignmentsArray = res;
+        });
+      console.log(this.assignmentsArray);
+
+  
+
+
+
         this.assignmentsArrayFiltered = this.assignmentsArray.filter(assignment => 
           assignment.courseId == this.thisCourse._id);
   
@@ -567,6 +588,15 @@ export class TableTooComponent implements OnInit, OnChanges {
         console.log(this.thisCourse._id);
         console.log(this.assignmentsScoreArray);
   
+
+        await this.post.getAssignmentScorePromise()
+          .then(res => {
+          console.log(res);
+          this.assignmentsScoreArray = res;
+        });
+        console.log(this.assignmentsScoreArray);
+
+
         console.log(this.studentsArray[studentIndex]);
         const foundScoreStudentId = this.assignmentsScoreArray.filter(item => {
          return item.studentId == this.studentsArray[studentIndex]._id 
