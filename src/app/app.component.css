@@ -29,41 +29,13 @@ h1 {
 .header-container {
     /* border: 2px solid yellow; */
     display: grid;
-    grid-template-columns: 240px 4fr 1fr;
-    grid-template-rows: 160px;
+    grid-template-columns: 240px 5fr 1fr;
+    /* grid-template-rows: 160px; */
     /* justify-content: space-between; */
-    flex-wrap: wrap;
     /* height: 80px; */
+    flex-wrap: wrap;
 }
 
-.title {
-    /* border: 2px solid yellow; */
-
-    /* border: 2px solid green; */
-    /* flex: 1; */
-    /* display: flex; */
-    /* flex-shrink: 1; */
-}
-
-.spacer {
-    /* border: 2px solid red; */
-
-    /* flex: 2; */
-    /* border: 2px dotted purple; */
-    /* flex-shrink: 3; */
-}
-
-.login-userDisplay-button {
-    /* padding-top: 200px; */
-    /* padding-right: 18px; */
-    background-color: rgb(57, 243, 32);
-    /* border: 3px solid lime; */
-    /* padding: 32px; */
-    /* margin: auto; */
-    /* flex-direction: column; */
-    /* display: flex; */
-    /* flex: 1 */
-}
 
 .user-info {
     font-size: 15px;
@@ -79,23 +51,63 @@ h1 {
     /* padding-left: 5px; */
 }
 
-.login-button {
+.logout-userDisplay-button {
+    /* padding-top: 200px; */
+    /* padding-right: 18px; */
+    background-color: rgb(116, 157, 211);
+    /* border: 3px solid lime; */
+    /* padding: 32px; */
+    /* margin: auto; */
+    /* flex-direction: column; */
+    /* display: flex; */
+    /* flex: 1 */
+}
+
+
+.logout-button {
     /* border: 1px solid yellow; */
     /* margin: auto; */
     margin-left: 10px;
     margin-bottom: 20px;
     margin-top: 18px;
     width: 40%;
-    background-color: rgb(76, 170, 187);
+    background-color: rgb(22, 96, 109);
     color: rgb(247, 239, 239);
 }
+
+.login {
+    margin-top: 18px;
+    margin-bottom: 22px;
+    margin-right: 100px;
+    background-color: rgb(116, 157, 211);
+    width: 100%;
 }
 
-.logout {
-    margin-top: 25px;
-    margin-right: 100px;
-    margin-bottom: 30px; 
+
+.login-button {
+    margin-left: 150px;
+    margin-right: 150px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    width: 30%;
+    background-color: rgb(22, 96, 109);
+    color: rgb(247, 239, 239);
 }
+
+}
+
+
+/* -------------------------------------- */
+
+/* .header-container {
+    /* border: 2px solid yellow; */
+    display: grid;
+    grid-template-columns: 240px 5fr 1fr;
+    grid-template-rows: 160px;
+    /* justify-content: space-between; */
+    /* height: 80px; */
+    flex-wrap: wrap;
+ */
 
 
 .title {
@@ -107,10 +119,10 @@ h1 {
     /* flex-shrink: 1; */
 }
 
-.login-userDisplay-button {
+.logout-userDisplay-button {
     padding-top: 15px;
     /* padding-right: 18px; */
-    background-color: rgb(117, 166, 173);
+    background-color: rgb(116, 157, 211);
     /* border: 3px solid lime; */
     /* padding: 32px; */
     /* margin: auto; */
@@ -118,6 +130,17 @@ h1 {
     /* display: flex; */
     /* flex: 1 */
 }
+
+.logout-button {
+    /* border: 1px solid yellow; */
+    /* margin: auto; */
+    margin-left: 162px;
+    margin-bottom: 18px;
+    width: 30%;
+    background-color: rgb(22, 96, 109);
+    color: rgb(247, 239, 239);
+}
+
 
 .user-info {
     font-size: 16px;
@@ -131,13 +154,27 @@ h1 {
     padding-left: 70px;
 }
 
+
+.login-userDisplay-button {
+    margin-bottom: 100px;
+    background-color: rgb(116, 157, 211);
+}
+
+.login {
+    margin-top: 18px;
+    margin-bottom: 22px;
+    margin-right: 100px;
+    background-color: rgb(116, 157, 211);
+    width: 100%;
+}
+
 .login-button {
-    /* border: 1px solid yellow; */
-    /* margin: auto; */
-    margin-left: 162px;
-    /* margin-bottom: 20px; */
+    margin-left: 150px;
+    margin-right: 150px;
+    margin-top: 30px;
+    margin-bottom: 30px;
     width: 30%;
-    background-color: rgb(33, 113, 128);
+    background-color: rgb(22, 96, 109);
     color: rgb(247, 239, 239);
 }
 
