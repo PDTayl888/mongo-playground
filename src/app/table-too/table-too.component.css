@@ -54,13 +54,13 @@ tr {
 }
 
 #courseTopRule {
-    margin-top: 20px;
-    margin-bottom: 29px;
+    margin-top: 1px;
+    margin-bottom: 1px;
     color: lime;
     border-radius: 7px;
     border: 2px solid rgb(145, 235, 145);
-    border-top: 8px solid rgb(145, 235, 145);
-    border-bottom: 8px solid rgb(145, 235, 145);
+    border-top: 18px solid rgb(145, 235, 145);
+    border-bottom: 18px solid rgb(145, 235, 145);
 }
 
 
