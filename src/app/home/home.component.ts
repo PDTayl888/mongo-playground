@@ -146,8 +146,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.coursesArray.push(this.recentCourse);
     console.log(this.coursesArray);
 
-    this.myForm.reset();
-  }
+    this.myForm.reset();  }
 
 }
 
