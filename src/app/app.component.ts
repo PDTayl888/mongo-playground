@@ -37,7 +37,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   currentCourse: any;
 
-  constructor(private router: Router, private fb: FormBuilder, private post: PostsService, private http: HttpClient, renderer2: Renderer2, private auth: AuthService,) {}
+  constructor(private router: Router, private fb: FormBuilder, private post: PostsService, private http: HttpClient, renderer2: Renderer2, public auth: AuthService,) {}
 
   async ngOnInit() {
 
