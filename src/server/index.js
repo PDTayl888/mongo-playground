@@ -10,7 +10,9 @@ const { User } = require('./models/user');
 require('./prod')(app)
 
 const cors = require('cors');
-
+// Ew2CGYTSwMsjX4yz
+// mongodb atlas user password
+// Ew2CGYTSwMsjX4yz
 
 app.options('*', cors());
 app.use(cors());
@@ -21,8 +23,16 @@ const port = process.env.PORT || 3000;
 
 app.listen(port, () => console.log(`Listening on port ${port}...`));
 
-mongoose.connect('mongodb://localhost/playground',  { useNewUrlParser: true })
-    .then(() => console.log("connected to mongodb"));
+// mongoose.connect('mongodb://localhost/playground',  { useNewUrlParser: true })
+//     .then(() => console.log("connected to mongodb"));
+
+mongoose.connect('mongodb+srv://patrick:Ew2CGYTSwMsjX4yz@cluster0-v2kit.mongodb.net/test?retryWrites=true&w=majority')
+    .then(() => {
+        console.log('Connected to DB');
+    })
+    .catch(() => {
+        console.log('Connection failed');
+    })
 
 const dataArray = [
     { greeting: "shit is real funky yo!", title: "Comm 101"},
