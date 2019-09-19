@@ -6,6 +6,11 @@ import { AuthService } from './services/auth.service';
 import { User } from './services/user.model';
 import { Router } from '@angular/router';
 
+import { environment } from "../environments/environment";
+
+const URL = environment.apiUrl;
+
+
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -66,7 +71,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
     // this.courseForm.valueChanges.subscribe(console.log)
 
-      this.http.get("http://localhost:3000/api/courses", httpOptions)
+      this.http.get(URL + "api/courses", httpOptions)
       .subscribe(item => {
         console.log(item);
         this.coursesArray = item;

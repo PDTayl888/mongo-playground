@@ -26,13 +26,23 @@ app.listen(port, () => console.log(`Listening on port ${port}...`));
 // mongoose.connect('mongodb://localhost/playground',  { useNewUrlParser: true })
 //     .then(() => console.log("connected to mongodb"));
 
-mongoose.connect('mongodb+srv://patrick:Ew2CGYTSwMsjX4yz@cluster0-v2kit.mongodb.net/test?retryWrites=true&w=majority')
-    .then(() => {
-        console.log('Connected to DB');
-    })
-    .catch(() => {
-        console.log('Connection failed');
-    })
+
+mongoose.connect('mongodb://newuser:V3lv3ts3a@ds219308.mlab.com:19308/grades')
+.then(() => {
+    console.log('Connected to DB');
+})
+.catch(() => {
+    console.log('Connection failed');
+})
+
+
+// mongoose.connect('mongodb+srv://patrick:Ew2CGYTSwMsjX4yz@cluster0-v2kit.mongodb.net/test?retryWrites=true&w=majority')
+//     .then(() => {
+//         console.log('Connected to DB');
+//     })
+//     .catch(() => {
+//         console.log('Connection failed');
+//     })
 
 const dataArray = [
     { greeting: "shit is real funky yo!", title: "Comm 101"},

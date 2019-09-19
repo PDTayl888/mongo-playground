@@ -9,5 +9,8 @@ export const environment = {
     messagingSenderId: "816600334955",
     appId: "1:816600334955:web:cacf5b3eac416aa4"
   },
-  apiUrl: "http://gradestaylormedia-env.8iyvbbeshv.us-east-2.elasticbeanstalk.com/api/"
+  apiUrl: "https://www.backend-grades.com/api/"
 };
+
+
+// apiUrl: "http://gradestaylormedia-env.8iyvbbeshv.us-east-2.elasticbeanstalk.com/api/"
