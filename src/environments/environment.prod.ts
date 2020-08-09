@@ -1,16 +1,16 @@
 export const environment = {
   production: true,
-  firebase : {
+  firebase: {
     apiKey: "AIzaSyA9polmvVdnuKceSJVTlpmaPyrVjYwTlvA",
     authDomain: "grades-5693a.firebaseapp.com",
     databaseURL: "https://grades-5693a.firebaseio.com",
     projectId: "grades-5693a",
     storageBucket: "",
     messagingSenderId: "816600334955",
-    appId: "1:816600334955:web:cacf5b3eac416aa4"
+    appId: "1:816600334955:web:cacf5b3eac416aa4",
   },
-  apiUrl: "https://www.backend-grades.com/api/"
+  apiUrl: "https://git.heroku.com/taylor-grades.git",
 };
-
+// https://www.backend-grades.com/api
 
 // apiUrl: "http://gradestaylormedia-env.8iyvbbeshv.us-east-2.elasticbeanstalk.com/api/"

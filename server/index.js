@@ -21,13 +21,15 @@ app.use(express.json());
 
 const port = process.env.PORT || 3000;
 
-app.listen(port, () => console.log(`Listening on port ${port}...`));
+// app.listen(port, () => console.log(`Listening on port ${port}...`));
 
 // mongoose.connect('mongodb://localhost/playground',  { useNewUrlParser: true })
 //     .then(() => console.log("connected to mongodb"));
 
 mongoose
-  .connect("mongodb://newuser:V3lv3ts3a@ds219308.mlab.com:19308/grades")
+  .connect(
+    "mongodb://<patrick>:<Asherbasher8808>@ds011715.mlab.com:11715/gradesdb"
+  )
   .then(() => {
     console.log("Connected to DB");
   })

@@ -1,26 +1,31 @@
-import { Component, OnInit, ViewChild, ElementRef, Renderer2, AfterViewInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
-import { PostsService } from '../services/posts.service';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { AuthService } from '../services/auth.service';
-import { User } from '../services/user.model';
-import { AngularFireAuth } from '@angular/fire/auth';
-
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  ElementRef,
+  Renderer2,
+  AfterViewInit,
+} from "@angular/core";
+import { FormGroup, FormBuilder } from "@angular/forms";
+import { PostsService } from "../services/posts.service";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { AuthService } from "../services/auth.service";
+import { User } from "../services/user.model";
+import { AngularFireAuth } from "@angular/fire/auth";
 
 const httpOptions = {
   headers: new HttpHeaders({
-    'Content-Type': 'application/json',
-    'Authorization': 'my-auth-token'
-  })
+    "Content-Type": "application/json",
+    Authorization: "my-auth-token",
+  }),
 };
 
 @Component({
-  selector: 'home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  selector: "home",
+  templateUrl: "./home.component.html",
+  styleUrls: ["./home.component.css"],
 })
 export class HomeComponent implements OnInit, AfterViewInit {
-
   currentUser: any = true;
 
   usersArray: any = [];
@@ -29,7 +34,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   recentCourse: any;
 
-  coursesArray: any;
+  coursesArray: any = [];
 
   newUid: any;
 
@@ -37,29 +42,33 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   myForm: any;
 
-
-  constructor(private fb: FormBuilder, private post: PostsService, private http: HttpClient, renderer2: Renderer2, private auth: AuthService, private afAuth: AngularFireAuth) { }
+  constructor(
+    private fb: FormBuilder,
+    private post: PostsService,
+    private http: HttpClient,
+    renderer2: Renderer2,
+    private auth: AuthService,
+    private afAuth: AngularFireAuth
+  ) {}
 
   async ngOnInit() {
-
     this.myForm = this.fb.group({
-      courseInput: ''
-    })
+      courseInput: "",
+    });
 
-    await this.post.getUsersPromise()
-      .then(res => {
-        this.usersArrayNew = res;
-      })
-    console.log('INIT USERSARRAY');
+    await this.post.getUsersPromise().then((res) => {
+      this.usersArrayNew = res;
+    });
+    console.log("INIT USERSARRAY");
     console.log(this.usersArrayNew);
 
     const authorizedUid = this.afAuth.auth.currentUser.uid;
 
-    this.usersArrayNew.forEach(item => {
+    this.usersArrayNew.forEach((item) => {
       if (item.uid == authorizedUid) {
         this.currentUser = false;
       }
-    })
+    });
     console.log(this.currentUser);
 
     if (this.currentUser) {
@@ -70,58 +79,47 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
       const inputToJsonUser = {
         displayName: authorizedDisplayName,
-        uid: authorizedUid
-      }
+        uid: authorizedUid,
+      };
       console.log(inputToJsonUser);
       this.post.submitUser(inputToJsonUser);
     }
 
-
-    await this.post.getCoursesPromise()
-      .then(res => {
-        this.coursesArray = res;
-      })
-    console.log('MARKED');
+    await this.post.getCoursesPromise().then((res) => {
+      this.coursesArray = res;
+    });
+    console.log("MARKED");
     console.log(this.coursesArray);
 
-    console.log('AUTHORIZEDUID CHECK');
+    console.log("AUTHORIZEDUID CHECK");
     console.log(authorizedUid);
-    this.coursesArray = this.coursesArray.filter(res =>
-      res.uid === authorizedUid
-    )
+    this.coursesArray = this.coursesArray.filter(
+      (res) => res.uid === authorizedUid
+    );
 
-    console.log('COURSESCURRENTFILTERED');
+    console.log("COURSESCURRENTFILTERED");
     console.log(this.coursesArray);
-
   }
 
+  ngAfterViewInit() {}
 
-
-  ngAfterViewInit() {
-  }
-
-
-
-  title = 'grades.';
+  title = "grades.";
 
   emitCourse(course) {
     console.log(course);
     this.currentCourse = course;
   }
 
-
   users() {
-    this.auth.getUsers()
-      .subscribe((res) => {
-        this.usersArray = res.map((item) => {
-          return {
-            data: item.payload.doc.data()
-          }
-        })
+    this.auth.getUsers().subscribe((res) => {
+      this.usersArray = res.map((item) => {
+        return {
+          data: item.payload.doc.data(),
+        };
       });
+    });
     console.log(this.usersArray);
   }
-
 
   async addCourseTitle(course) {
     console.log(course);
@@ -130,29 +128,21 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
     const inputToJsonCourse = {
       title: course,
-      uid: authorizedUid
-    }
+      uid: authorizedUid,
+    };
 
     console.log(inputToJsonCourse);
-    console.log('submitCourseTitle is gettin invoked all up in here yo');
-    this.post.submitCourse(inputToJsonCourse)
+    console.log("submitCourseTitle is gettin invoked all up in here yo");
+    this.post.submitCourse(inputToJsonCourse);
 
-    await this.post.getRecentCoursePromise()
-      .then(res => {
-        this.recentCourse = res;
-      })
+    await this.post.getRecentCoursePromise().then((res) => {
+      this.recentCourse = res;
+    });
 
     console.log(this.recentCourse);
     this.coursesArray.push(this.recentCourse);
-<<<<<<< HEAD
-    // console.log(this.coursesArray);
-  }
-=======
     console.log(this.coursesArray);
 
-    this.myForm.reset();  }
->>>>>>> d211ae9d09b0a9a7cca1e64371afead4c59ab6b4
-
+    this.myForm.reset();
+  }
 }
-
-
