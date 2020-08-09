@@ -35,10 +35,16 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   currentCourse: any;
 
+  myForm: any;
+
 
   constructor(private fb: FormBuilder, private post: PostsService, private http: HttpClient, renderer2: Renderer2, private auth: AuthService, private afAuth: AngularFireAuth) { }
 
   async ngOnInit() {
+
+    this.myForm = this.fb.group({
+      courseInput: ''
+    })
 
     await this.post.getUsersPromise()
       .then(res => {
@@ -138,8 +144,14 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
     console.log(this.recentCourse);
     this.coursesArray.push(this.recentCourse);
+<<<<<<< HEAD
     // console.log(this.coursesArray);
   }
+=======
+    console.log(this.coursesArray);
+
+    this.myForm.reset();  }
+>>>>>>> d211ae9d09b0a9a7cca1e64371afead4c59ab6b4
 
 }
 

@@ -12,8 +12,12 @@ export const environment = {
     storageBucket: "",
     messagingSenderId: "816600334955",
     appId: "1:816600334955:web:cacf5b3eac416aa4"
-  }
+  },
+  apiUrl: "https://www.backend-grades.com/api/"
 };
+
+// apiUrl: "http://localhost:3000/api/"
+
 
 /*
  * For easier debugging in development mode, you can import the following file

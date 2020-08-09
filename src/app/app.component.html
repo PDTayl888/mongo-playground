@@ -11,21 +11,22 @@
     <div class="spacer"></div>
 
 
-    <div class="login-userDisplay-button" *ngIf="auth.user$ | async as user; else login">
+    <div class="logout-userDisplay-button" *ngIf="auth.user$ | async as user; else login">
             
-    <button class="login-button" (click)="auth.signOut()">Sign Out</button>
+    <button class="logout-button" (click)="auth.signOut()">Sign Out</button>
 
 
     <pre class="user-info">
         {{ user.email }}
     </pre>
 
-    </div>
+    </div> 
 
 <ng-template #login>
-        <div class="login-userDisplay-button">
-
-    <button class="login-button" (click)="auth.googleSignin()">Login</button>
+        <div class="logout-userDisplay-button">
+        <div class="login">
+    <button class="logout-button" (click)="auth.googleSignin()">Login</button>
+    </div>
 </div>
 </ng-template>
 
@@ -40,32 +41,6 @@
 <!-- <home *ngIf="showHome"></home> -->
 
 <router-outlet></router-outlet>
-
-
-<!-- <div class="serparator"></div> -->
-
-
-
-
-<!-- <button class="userButton" (click)="users()">USERS</button>
-<tr *ngFor="let user of usersArray">
-        <td>{{ user.data.displayName | json }}</td>
-        <td>{{ user.data.email | json }}</td>
-        <img [src]="user.data.photoURL" alt="photo goes here">
-        <td>{{ user.data.uid | json }}</td>
-        <td>{{ user.data.id | json }}</td>
-     </tr>
-     <hr>
-     <hr> -->
-
-     <!-- <div class="navi">
-	<ul>
-		  <li><a href="#sec1">about</a></li>
-			<li><a href="#sec2">portfolio</a></li>
-			<li><a href="#sec3">contact</a></li>
-	</ul>
-</div> -->
-
 
 </body>
 

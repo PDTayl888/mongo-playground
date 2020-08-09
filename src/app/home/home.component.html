@@ -1,10 +1,15 @@
-<div class="add-course-container">
-    <button class="button course-button" (click)="addCourseTitle(title.value)">Add Course</button>
-    <input #title placeholder="course title">
-</div>
-
-<hr>
-<hr>
-<table-too [thisCourse]="course"  *ngFor="let course of coursesArray"></table-too>
+<form [formGroup]="myForm">
+    <div class="add-course-container">
+        <button 
+            class="button course-button" 
+            (click)="addCourseTitle(title.value)">Add Course</button>
+        <input 
+            (keydown.enter)="addCourseTitle(title.value)"
+            formControlName="courseInput"
+            #title 
+            placeholder="course title">
+    </div>
+</form>
+<table-too [thisCourse]="course" *ngFor="let course of coursesArray"></table-too>
 
  

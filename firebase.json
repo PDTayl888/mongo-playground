@@ -1,13 +1,10 @@
 {
-  "database": {
-    "rules": " database.rules.ts"
-  },
   "firestore": {
     "rules": "firestore.rules.ts",
     "indexes": "firestore.indexes.json"
   },
   "hosting": {
-    "public": "dist",
+    "public": "dist/cors-client",
     "ignore": [
       "firebase.json",
       "**/.*",

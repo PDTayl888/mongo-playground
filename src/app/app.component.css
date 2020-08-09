@@ -1,9 +1,11 @@
 body {
-    background-color: rgb(119, 167, 175);
+    background-color: rgb(130, 177, 185);
     /* box-shadow: 5px 7px rgb(213, 238, 248); */
     /* border-radius: 3px; */
     margin: 0px;
+    overflow: auto;
 }
+
 
 #separator {
     border: 15px solid purple;
@@ -28,35 +30,33 @@ h1 {
 .header-container {
     /* border: 2px solid yellow; */
     display: grid;
-    grid-template-columns: 240px 4fr 1fr;
-    grid-template-rows: 160px;
+    grid-template-columns: 240px 5fr 1fr;
+    /* grid-template-rows: 160px; */
     /* justify-content: space-between; */
-    flex-wrap: wrap;
     /* height: 80px; */
-}
-
-.title {
-    /* border: 2px solid yellow; */
-
-    /* border: 2px solid green; */
-    /* flex: 1; */
-    /* display: flex; */
-    /* flex-shrink: 1; */
-}
-
-.spacer {
-    /* border: 2px solid red; */
-
-    /* flex: 2; */
-    /* border: 2px dotted purple; */
-    /* flex-shrink: 3; */
+    flex-wrap: wrap;
 }
 
 
-.login-userDisplay-button {
+.user-info {
+    font-size: 15px;
+    /* border: 1px solid orange; */
+    color: rgb(255, 255, 255);
+    /* margin-bottom: 30px; */
+    padding-top: 10px;
+    padding-right: 20px;
+    padding-left: 10px;
+    width: 30%;
+    /* margin-right: 100px; */
+    /* padding-top: 20px; */    
+    /* padding-left: 5px; */
+}
+
+.logout-userDisplay-button {
     /* padding-top: 200px; */
     /* padding-right: 18px; */
-    background-color: rgb(113, 175, 167);
+    /* background-color: rgb(116, 157, 211); */
+    background-image: linear-gradient(to right,yellow,rgb(116, 157, 211))
     /* border: 3px solid lime; */
     /* padding: 32px; */
     /* margin: auto; */
@@ -65,30 +65,53 @@ h1 {
     /* flex: 1 */
 }
 
-.user-info {
-    font-size: 15px;
-    /* border: 1px solid orange; */
-    color: white;
-    /* margin-bottom: 30px; */
-    padding-top: 10px;
-    padding-right: 10px;
-    padding-left: 10px;
-    width: 30%;
-    /* padding-top: 20px; */    
-    /* padding-left: 5px; */
-}
 
-.login-button {
+.logout-button {
     /* border: 1px solid yellow; */
     /* margin: auto; */
     margin-left: 10px;
     margin-bottom: 20px;
     margin-top: 18px;
     width: 40%;
-    background-color: rgb(33, 113, 128);
+    background-color: rgb(22, 96, 109);
     color: rgb(247, 239, 239);
 }
+
+.login {
+    margin-top: 18px;
+    margin-bottom: 22px;
+    margin-right: 100px;
+    /* background-color: rgb(116, 157, 211); */
+    background-image: linear-gradient(to right,yellow,rgb(116, 157, 211));
+
+    width: 100%;
 }
+
+
+.login-button {
+    margin-left: 150px;
+    margin-right: 150px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    width: 30%;
+    background-color: rgb(22, 96, 109);
+    color: rgb(247, 239, 239);
+}
+
+}
+
+
+/* -------------------------------------- */
+
+/* .header-container {
+    /* border: 2px solid yellow; */
+    display: grid;
+    grid-template-columns: 240px 5fr 1fr;
+    grid-template-rows: 160px;
+    /* justify-content: space-between; */
+    /* height: 80px; */
+    flex-wrap: wrap;
+ */
 
 
 .title {
@@ -100,10 +123,12 @@ h1 {
     /* flex-shrink: 1; */
 }
 
-.login-userDisplay-button {
+.logout-userDisplay-button {
     padding-top: 15px;
     /* padding-right: 18px; */
-    background-color: rgb(117, 164, 172);
+    /* background-color: rgb(116, 157, 211); */
+    background-image: linear-gradient(to right,yellow,rgb(116, 157, 211))
+
     /* border: 3px solid lime; */
     /* padding: 32px; */
     /* margin: auto; */
@@ -112,10 +137,21 @@ h1 {
     /* flex: 1 */
 }
 
+.logout-button {
+    /* border: 1px solid yellow; */
+    /* margin: auto; */
+    margin-left: 162px;
+    margin-bottom: 18px;
+    width: 30%;
+    background-color: rgb(22, 96, 109);
+    color: rgb(247, 239, 239);
+}
+
+
 .user-info {
-    font-size: 15px;
+    font-size: 16px;
     /* border: 1px solid orange; */
-    color: white;
+    color: rgb(192, 8, 161);
     /* margin-bottom: 30px; */
     /* padding-top: 10px;
     padding-right: 10px;
@@ -124,13 +160,28 @@ h1 {
     padding-left: 70px;
 }
 
+
+.login-userDisplay-button {
+    margin-bottom: 100px;
+    background-color: rgb(116, 157, 211);
+}
+
+.login {
+    margin-top: 18px;
+    margin-bottom: 28px;
+    margin-right: 100px;
+    /* background-color: rgb(116, 157, 211); */
+    background-image: linear-gradient(to right,yellow,rgb(116, 157, 211));
+    width: 100%;
+}
+
 .login-button {
-    /* border: 1px solid yellow; */
-    /* margin: auto; */
-    margin-left: 162px;
-    /* margin-bottom: 20px; */
+    margin-left: 150px;
+    margin-right: 150px;
+    margin-top: 30px;
+    margin-bottom: 30px;
     width: 30%;
-    background-color: rgb(33, 113, 128);
+    background-color: rgb(22, 96, 109);
     color: rgb(247, 239, 239);
 }
 

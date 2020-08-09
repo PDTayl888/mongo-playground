@@ -2,31 +2,25 @@
 <input #field type="text">
 <input #header type="text">
 <button (click)="poop()">poop</button> -->
-
-<button (click)="newStudent(studentName)">ADD STUDENT</button>
-<input 
-#studentName
-type="text">
 <!-- <button (click)=sumTotalPossible()>parseInt</button> -->
+<div id="courseTopRule">
 
-<hr>
-<button (click)="newAssignment(assignmentTitle, total)">ADD ASSIGNMENT</button>
-<input 
-#assignmentTitle
-type="text">
-<input
-#total
-type="text">
-<hr>
-<!-- <button (click)="logCols()">LOG COLS</button>
+<button (click)="logCols()">LOG COLS</button>
 <button (click)="logStudents()">LOG STUDENTS</button>
-<hr> -->
+<!-- <hr> -->
 <!-- <label for="studName" *ngIf="showStudentName">NEW NAME </label>
 <input id="studName" *ngIf="showStudentName"> -->
 
 <div class="content-section implementation">
 
-    <button (click)="editMode()">REMOVE MODE</button>
+    
+    <button
+    (click)="removeCourse(thisCourse._id)"
+    class="button">REMOVE {{ thisCourse.title | uppercase }}</button>
+
+    <button 
+    class="button"
+    (click)="editMode()">REMOVE MODE</button>
     <h1 class="first">{{ thisCourse.title | uppercase }}</h1>
     <p-table [columns]="cols" [value]="students">
         <ng-template pTemplate="header" let-columns>
@@ -63,7 +57,49 @@ type="text">
             </tr>    
         </ng-template>        
     </p-table>
-<hr>
-<hr>
-<button (click)="showData(this.students)">SHOW DATA ARRAY</button>
-<hr> 
+
+
+    <div id="add-student">
+        <div id="student-button-container">
+            <button 
+            id="student-button"
+            (click)="newStudent(studentName)">ADD {{ thisCourse.title | uppercase }} STUDENT</button> 
+        </div>
+        <div id="student-input-container">
+            <input 
+            id="student-input"
+            (keydown.enter)="newStudent(studentName)"
+            #studentName
+            type="text"
+            placeholder="name">   
+        </div>   
+    </div>
+
+    <hr>
+
+    <div id="add-assignment">
+        <div id="assignment-button-container">
+            <button 
+            id="assignment-button"
+            class="button"
+
+            (click)="newAssignment(assignmentTitle, total)">ADD {{ thisCourse.title | uppercase }} ASSIGNMENT</button>
+        </div>
+
+        <div id="assignment-input-container">
+            <input 
+                id="assignment-title"
+                (keydown.enter)="newAssignment(assignmentTitle, total)"
+                #assignmentTitle
+                type="text"
+                placeholder="assignment title">
+            <input
+                id="assignment-total"
+                (keydown.enter)="newAssignment(assignmentTitle, total)"
+                #total
+                type="text"
+                placeholder="total possible">
+        </div>
+    </div>
+    
+</div>
