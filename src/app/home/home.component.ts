@@ -9,7 +9,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 
 const httpOptions = {
   headers: new HttpHeaders({
-    'Content-Type':  'application/json',
+    'Content-Type': 'application/json',
     'Authorization': 'my-auth-token'
   })
 };
@@ -50,43 +50,43 @@ export class HomeComponent implements OnInit, AfterViewInit {
       .then(res => {
         this.usersArrayNew = res;
       })
-      console.log('INIT USERSARRAY');
-      console.log(this.usersArrayNew);
+    console.log('INIT USERSARRAY');
+    console.log(this.usersArrayNew);
 
-      const authorizedUid = this.afAuth.auth.currentUser.uid;
-
-      this.usersArrayNew.forEach(item => {
-        if(item.uid == authorizedUid) {
-          this.currentUser = false;
-        }
-      })
-      console.log(this.currentUser);
-
-    if(this.currentUser) {
-    const authorizedDisplayName = this.afAuth.auth.currentUser.displayName;
     const authorizedUid = this.afAuth.auth.currentUser.uid;
-    console.log(authorizedUid);
-    console.log(authorizedDisplayName);
-    
-    const inputToJsonUser = {
-      displayName: authorizedDisplayName,
-      uid: authorizedUid
+
+    this.usersArrayNew.forEach(item => {
+      if (item.uid == authorizedUid) {
+        this.currentUser = false;
+      }
+    })
+    console.log(this.currentUser);
+
+    if (this.currentUser) {
+      const authorizedDisplayName = this.afAuth.auth.currentUser.displayName;
+      const authorizedUid = this.afAuth.auth.currentUser.uid;
+      console.log(authorizedUid);
+      console.log(authorizedDisplayName);
+
+      const inputToJsonUser = {
+        displayName: authorizedDisplayName,
+        uid: authorizedUid
+      }
+      console.log(inputToJsonUser);
+      this.post.submitUser(inputToJsonUser);
     }
-    console.log(inputToJsonUser);
-    this.post.submitUser(inputToJsonUser);
-  }
 
 
     await this.post.getCoursesPromise()
       .then(res => {
         this.coursesArray = res;
       })
-      console.log('MARKED');
+    console.log('MARKED');
     console.log(this.coursesArray);
 
     console.log('AUTHORIZEDUID CHECK');
     console.log(authorizedUid);
-    this.coursesArray = this.coursesArray.filter(res => 
+    this.coursesArray = this.coursesArray.filter(res =>
       res.uid === authorizedUid
     )
 
@@ -144,9 +144,14 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
     console.log(this.recentCourse);
     this.coursesArray.push(this.recentCourse);
+<<<<<<< HEAD
+    // console.log(this.coursesArray);
+  }
+=======
     console.log(this.coursesArray);
 
     this.myForm.reset();  }
+>>>>>>> d211ae9d09b0a9a7cca1e64371afead4c59ab6b4
 
 }
 
