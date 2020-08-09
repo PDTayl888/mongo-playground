@@ -7,16 +7,12 @@ const { Student } = require("./models/student");
 const { AssignmentScore } = require("./models/assignmentScore");
 const { User } = require("./models/user");
 
-<<<<<<< HEAD:src/server/index.js
-const cors = require("cors");
-=======
-require('./prod')(app)
+require("./prod")(app);
 
-const cors = require('cors');
+const cors = require("cors");
 // Ew2CGYTSwMsjX4yz
 // mongodb atlas user password
 // Ew2CGYTSwMsjX4yz
->>>>>>> d211ae9d09b0a9a7cca1e64371afead4c59ab6b4:server/index.js
 
 app.options("*", cors());
 app.use(cors());
@@ -27,23 +23,17 @@ const port = process.env.PORT || 3000;
 
 app.listen(port, () => console.log(`Listening on port ${port}...`));
 
-<<<<<<< HEAD:src/server/index.js
-mongoose
-  .connect("mongodb://localhost/playground", { useNewUrlParser: true })
-  .then(() => console.log("connected to mongodb"));
-=======
 // mongoose.connect('mongodb://localhost/playground',  { useNewUrlParser: true })
 //     .then(() => console.log("connected to mongodb"));
 
-
-mongoose.connect('mongodb://newuser:V3lv3ts3a@ds219308.mlab.com:19308/grades')
-.then(() => {
-    console.log('Connected to DB');
-})
-.catch(() => {
-    console.log('Connection failed');
-})
-
+mongoose
+  .connect("mongodb://newuser:V3lv3ts3a@ds219308.mlab.com:19308/grades")
+  .then(() => {
+    console.log("Connected to DB");
+  })
+  .catch(() => {
+    console.log("Connection failed");
+  });
 
 // mongoose.connect('mongodb+srv://patrick:Ew2CGYTSwMsjX4yz@cluster0-v2kit.mongodb.net/test?retryWrites=true&w=majority')
 //     .then(() => {
@@ -52,7 +42,6 @@ mongoose.connect('mongodb://newuser:V3lv3ts3a@ds219308.mlab.com:19308/grades')
 //     .catch(() => {
 //         console.log('Connection failed');
 //     })
->>>>>>> d211ae9d09b0a9a7cca1e64371afead4c59ab6b4:server/index.js
 
 app.get("/", (req, res, next) => {
   console.log("get route activated");
@@ -269,34 +258,29 @@ app.put("/api/assignments/:id", async (req, res) => {
   res.send(assignment);
 });
 
-<<<<<<< HEAD:src/server/index.js
 app.delete("/api/students/:id", async (req, res) => {
   console.log("remove student from DB invoked");
   console.log(req.params.id);
   const student = await Student.findByIdAndRemove(req.params.id);
-=======
-app.delete('/api/courses/:id', async(req, res) => {
-    app.delete('/api/students/:id', async(req, res) => {
-    console.log('remove student from DB invoked');
-    console.log(req.params.id);
-    const student = await Student.findByIdAndRemove(req.params.id);
 
-    res.send(student);
+  res.send(student);
 });
 
-    console.log('remove course from DB invoked');
-    console.log(req.params.id);
-    const course = await Course.findByIdAndRemove(req.params.id);
+app.delete("/api/courses/:id", async (req, res) => {
+  console.log("remove course from DB invoked");
+  console.log(req.params.id);
+  const course = await Course.findByIdAndRemove(req.params.id);
 
-    res.send(course);
+  res.send(course);
 });
 
-app.delete('/api/assignmentscore/:id', async(req, res) => {
-    console.log('remove assignmentscore backend invoked');
-    console.log(req.params.id);
+app.delete("/api/assignmentscore/:id", async (req, res) => {
+  console.log("remove assignmentscore backend invoked");
+  console.log(req.params.id);
 
-    const assignmentscore = await AssignmentScore.findByIdAndRemove(req.params.id);
->>>>>>> d211ae9d09b0a9a7cca1e64371afead4c59ab6b4:server/index.js
+  const assignmentscore = await AssignmentScore.findByIdAndRemove(
+    req.params.id
+  );
 
   res.send(student);
 });
